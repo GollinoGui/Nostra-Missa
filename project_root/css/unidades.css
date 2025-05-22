@@ -79,16 +79,16 @@
 
 /* === TÍTULO PRINCIPAL === */
 .titulo-unidades {
-  font-family: 'Caveat', cursive;
+ font-family: 'Caveat', cursive;
   font-size: 5rem;
-  color: #fdf7ef; /* cor clara como fundo dos blocos */
+  color: #e63946; /* vermelho vibrante */
   text-align: center;
   margin-bottom: 40px;
   text-shadow:
-  -2px -2px 1px #3a2c1d,
-   2px -2px 1px #3a2c1d,
-  -2px  2px 1px #3a2c1d,
-   2px  2px 1px #3a2c1d;
+    -2px -2px 1px #800020, 
+     2px -2px 1px #800020,
+    -2px  2px 1px #800020,
+     2px  2px 1px #800020;
 }
 
 /* === BLOCOS ZIGZAG === */

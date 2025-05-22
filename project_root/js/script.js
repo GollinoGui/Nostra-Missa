@@ -988,3 +988,312 @@ const swiper = new Swiper('.depoimento-swiper', {
     disableOnInteraction: false,
   },
 });
+// Função para o calendário modal
+// Adicione este código ao seu arquivo script.js
+document.addEventListener('DOMContentLoaded', function() {
+  const btnCalendario = document.getElementById('btn-calendario-completo');
+  const calendarioModal = document.getElementById('calendario-modal');
+  const closeModal = document.querySelector('.close-modal');
+  
+  if (btnCalendario && calendarioModal) {
+    btnCalendario.addEventListener('click', function(e) {
+      e.preventDefault();
+      calendarioModal.style.display = 'block';
+    });
+  }
+  
+  if (closeModal && calendarioModal) {
+    closeModal.addEventListener('click', function() {
+      calendarioModal.style.display = 'none';
+    });
+    
+    // Fechar modal ao clicar fora
+    window.addEventListener('click', function(e) {
+      if (e.target === calendarioModal) {
+        calendarioModal.style.display = 'none';
+      }
+    });
+  }
+});
+function gerarCalendario(ano, mes) {
+  // Obter o elemento onde o calendário será renderizado
+  const calendario = document.getElementById('dias-calendario');
+  calendario.innerHTML = '';
+  
+  // Criar uma data para o primeiro dia do mês
+  const primeiroDia = new Date(ano, mes, 1);
+  // Obter o último dia do mês
+  const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+  // Obter o dia da semana do primeiro dia (0 = Domingo, 6 = Sábado)
+  const primeiroDiaSemana = primeiroDia.getDay();
+  
+  // Nomes dos meses em português
+  const nomesMeses = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+  ];
+  
+  // Atualizar o título do mês
+  document.getElementById('mes-atual').textContent = `${nomesMeses[mes]} ${ano}`;
+  
+  // Eventos (exemplo)
+  const eventos = [
+    { data: new Date(2023, 5, 15), titulo: 'Noite Napolitana', tipo: 'degustacao' },
+    { data: new Date(2023, 5, 22), titulo: 'Workshop de Massas', tipo: 'workshop' },
+    { data: new Date(2023, 5, 30), titulo: 'Festival de Sabores', tipo: 'festival' },
+    { data: new Date(2023, 6, 5), titulo: 'Vinhos Italianos', tipo: 'degustacao' },
+    { data: new Date(2023, 6, 18), titulo: 'Segredos do Molho', tipo: 'workshop' },
+    { data: new Date(2023, 7, 10), titulo: 'Pizza Week', tipo: 'festival' }
+  ];
+  
+  // Adicionar células vazias para os dias antes do primeiro dia do mês
+  for (let i = 0; i < primeiroDiaSemana; i++) {
+    const diaVazio = document.createElement('div');
+    diaVazio.className = 'dia';
+    calendario.appendChild(diaVazio);
+  }
+  
+  // Adicionar células para cada dia do mês
+  for (let dia = 1; dia <= ultimoDia; dia++) {
+    const diaAtual = new Date(ano, mes, dia);
+    const diaEl = document.createElement('div');
+    diaEl.className = 'dia';
+    diaEl.textContent = dia;
+    
+    // Verificar se é o dia atual
+    const hoje = new Date();
+    if (diaAtual.getDate() === hoje.getDate() && 
+        diaAtual.getMonth() === hoje.getMonth() && 
+        diaAtual.getFullYear() === hoje.getFullYear()) {
+      diaEl.classList.add('dia-atual');
+    }
+    
+    // Verificar se há eventos neste dia
+    const eventosNoDia = eventos.filter(evento => 
+      evento.data.getDate() === dia && 
+      evento.data.getMonth() === mes && 
+      evento.data.getFullYear() === ano
+    );
+    
+    if (eventosNoDia.length > 0) {
+      diaEl.classList.add('dia-evento');
+      
+      // Adicionar os eventos do dia
+      eventosNoDia.forEach(evento => {
+        const eventoEl = document.createElement('div');
+        eventoEl.className = `evento-item evento-${evento.tipo}`;
+        eventoEl.textContent = evento.titulo;
+        diaEl.appendChild(eventoEl);
+      });
+    }
+    
+    calendario.appendChild(diaEl);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const dataAtual = new Date();
+  const anoAtual = dataAtual.getFullYear();
+  const mesAtual = dataAtual.getMonth();
+  
+  // Gerar o calendário inicial
+  gerarCalendario(anoAtual, mesAtual);
+  
+  // Adicionar eventos para os botões de navegação
+  document.getElementById('mes-anterior').addEventListener('click', function() {
+    const mesAtualEl = document.getElementById('mes-atual');
+    const [nomeMes, ano] = mesAtualEl.textContent.split(' ');
+    const nomesMeses = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+    let mes = nomesMeses.indexOf(nomeMes);
+    let anoNum = parseInt(ano);
+    
+    mes--;
+    if (mes < 0) {
+      mes = 11;
+      anoNum--;
+    }
+    
+    gerarCalendario(anoNum, mes);
+  });
+  
+  document.getElementById('proximo-mes').addEventListener('click', function() {
+    const mesAtualEl = document.getElementById('mes-atual');
+    const [nomeMes, ano] = mesAtualEl.textContent.split(' ');
+    const nomesMeses = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+    let mes = nomesMeses.indexOf(nomeMes);
+    let anoNum = parseInt(ano);
+    
+    mes++;
+    if (mes > 11) {
+      mes = 0;
+      anoNum++;
+    }
+    
+    gerarCalendario(anoNum, mes);
+  });
+  
+  // Abrir modal do calendário
+  document.getElementById('btn-calendario-completo').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('calendario-modal').style.display = 'block';
+  });
+  
+  // Fechar modal
+  document.querySelector('.close-modal').addEventListener('click', function() {
+    document.getElementById('calendario-modal').style.display = 'none';
+  });
+  
+  // Fechar modal ao clicar fora
+  window.addEventListener('click', function(e) {
+    if (e.target === document.getElementById('calendario-modal')) {
+      document.getElementById('calendario-modal').style.display = 'none';
+    }
+  });
+});
+function gerarCalendario(ano, mes) {
+  // Obter o elemento onde o calendário será renderizado
+  const calendario = document.getElementById('dias-calendario');
+  calendario.innerHTML = '';
+  
+  // Criar uma data para o primeiro dia do mês
+  const primeiroDia = new Date(ano, mes, 1);
+  // Obter o último dia do mês
+  const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+  // Obter o dia da semana do primeiro dia (0 = Domingo, 6 = Sábado)
+  const primeiroDiaSemana = primeiroDia.getDay();
+  
+  // Nomes dos meses em português
+  const nomesMeses = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+  ];
+  
+  // Atualizar o título do mês
+  document.getElementById('mes-atual').textContent = `${nomesMeses[mes]} ${ano}`;
+  
+  // Eventos (exemplo)
+  const eventos = [
+    { data: new Date(2023, 5, 15), titulo: 'Noite Napolitana', tipo: 'degustacao' },
+    { data: new Date(2023, 5, 22), titulo: 'Workshop de Massas', tipo: 'workshop' },
+    { data: new Date(2023, 5, 30), titulo: 'Festival de Sabores', tipo: 'festival' },
+    { data: new Date(2023, 6, 5), titulo: 'Vinhos Italianos', tipo: 'degustacao' },
+    { data: new Date(2023, 6, 18), titulo: 'Segredos do Molho', tipo: 'workshop' },
+    { data: new Date(2023, 7, 10), titulo: 'Pizza Week', tipo: 'festival' }
+  ];
+  
+  // Adicionar células vazias para os dias antes do primeiro dia do mês
+  for (let i = 0; i < primeiroDiaSemana; i++) {
+    const diaVazio = document.createElement('div');
+    diaVazio.className = 'dia';
+    calendario.appendChild(diaVazio);
+  }
+  
+  // Adicionar células para cada dia do mês
+  for (let dia = 1; dia <= ultimoDia; dia++) {
+    const diaAtual = new Date(ano, mes, dia);
+    const diaEl = document.createElement('div');
+    diaEl.className = 'dia';
+    diaEl.textContent = dia;
+    
+    // Verificar se é o dia atual
+    const hoje = new Date();
+    if (diaAtual.getDate() === hoje.getDate() && 
+        diaAtual.getMonth() === hoje.getMonth() && 
+        diaAtual.getFullYear() === hoje.getFullYear()) {
+      diaEl.classList.add('dia-atual');
+    }
+    
+    // Verificar se há eventos neste dia
+    const eventosNoDia = eventos.filter(evento => 
+      evento.data.getDate() === dia && 
+      evento.data.getMonth() === mes && 
+      evento.data.getFullYear() === ano
+    );
+    
+    if (eventosNoDia.length > 0) {
+      diaEl.classList.add('dia-evento');
+      
+      // Adicionar os eventos do dia
+      eventosNoDia.forEach(evento => {
+        const eventoEl = document.createElement('div');
+        eventoEl.className = `evento-item evento-${evento.tipo}`;
+        eventoEl.textContent = evento.titulo;
+        diaEl.appendChild(eventoEl);
+      });
+    }
+    
+    calendario.appendChild(diaEl);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const dataAtual = new Date();
+  const anoAtual = dataAtual.getFullYear();
+  const mesAtual = dataAtual.getMonth();
+  
+  // Gerar o calendário inicial
+  gerarCalendario(anoAtual, mesAtual);
+  
+  // Adicionar eventos para os botões de navegação
+  document.getElementById('mes-anterior').addEventListener('click', function() {
+    const mesAtualEl = document.getElementById('mes-atual');
+    const [nomeMes, ano] = mesAtualEl.textContent.split(' ');
+    const nomesMeses = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+    let mes = nomesMeses.indexOf(nomeMes);
+    let anoNum = parseInt(ano);
+    
+    mes--;
+    if (mes < 0) {
+      mes = 11;
+      anoNum--;
+    }
+    
+    gerarCalendario(anoNum, mes);
+  });
+  
+  document.getElementById('proximo-mes').addEventListener('click', function() {
+    const mesAtualEl = document.getElementById('mes-atual');
+    const [nomeMes, ano] = mesAtualEl.textContent.split(' ');
+    const nomesMeses = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+    let mes = nomesMeses.indexOf(nomeMes);
+    let anoNum = parseInt(ano);
+    
+    mes++;
+    if (mes > 11) {
+      mes = 0;
+      anoNum++;
+    }
+    
+    gerarCalendario(anoNum, mes);
+  });
+  
+  // Abrir modal do calendário
+  document.getElementById('btn-calendario-completo').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('calendario-modal').style.display = 'block';
+  });
+  
+  // Fechar modal
+  document.querySelector('.close-modal').addEventListener('click', function() {
+    document.getElementById('calendario-modal').style.display = 'none';
+  });
+  
+  // Fechar modal ao clicar fora
+  window.addEventListener('click', function(e) {
+    if (e.target === document.getElementById('calendario-modal')) {
+      document.getElementById('calendario-modal').style.display = 'none';
+    }
+  });
+});
