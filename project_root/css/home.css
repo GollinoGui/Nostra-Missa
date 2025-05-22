@@ -49,8 +49,10 @@
 .hero-content h1 {
   font-size: 3rem;
   margin-bottom: 1.5rem;
+  margin-top: 3.5rem;
   line-height: 1.2;
 }
+
 
 .hero-buttons {
   display: flex;
@@ -158,17 +160,7 @@
   background-image: url('../assets/Pizza#29.jpg');
 }
 
-.topping-2 {
-  top: 40%;
-  right: 25%;
-  background-image: url('../assets/topping-mussarela.png');
-}
 
-.topping-3 {
-  bottom: 30%;
-  left: 40%;
-  background-image: url('../assets/topping-tomate.png');
-}
 
 .pizza-caption {
   text-align: center;
@@ -441,15 +433,15 @@
 
 .segredo-video {
   flex: 1;
-  min-width: 300px;
-  max-width: 550px; /* Limita a largura máxima */
+  min-width: 700px;
+  max-width: 650px; /* Limita a largura máxima */
   margin: 0 auto; /* Centraliza o vídeo */
 }
 
 .segredo-video video {
   width: 100%;
   height: auto;
-  max-height: 350px; /* Limita a altura máxima */
+  max-height: 450px; /* Limita a altura máxima */
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   object-fit: cover; /* Mantém a proporção e cobre o container */

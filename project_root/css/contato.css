@@ -27,7 +27,7 @@ form {
   background-color: transparent;
   color: #423020;
   font-weight: bolder;
-  margin-top: -40px;
+  margin-top: -60px;
   margin-left: -240px;
   max-width: 500px;
   height: 620px;
@@ -42,7 +42,7 @@ form h1 {
   font-family: 'Caveat', cursive;
   text-align: center;
   margin-bottom: 10px;
-  color: #db4c4c;
+  color: #d62323;
   font-size: 36pt;
 }
 
@@ -159,7 +159,7 @@ form input[type=submit] {
 }
 
 .coluna-direita {
-  background-color: #C04035;
+  background-color: #84100B;
   color: white;
   overflow: hidden;
   padding: 30px 30px;
@@ -221,7 +221,7 @@ form input[type=submit] {
 
 /* Rodapé */
 .footer {
-  background-color: #C04035; 
+  background-color: #84100B; 
   color: #fff;
   padding: 0px 0px; 
   width: 100%;
@@ -243,7 +243,7 @@ form input[type=submit] {
 .footer-links {
   display: flex;
   gap: 15px;
-
+  margin-left: -160px;
 }
 
 .footer-links a {
@@ -255,13 +255,14 @@ form input[type=submit] {
 
 .footer-address {
   display: flex;
-  gap: 20px;
+  gap: 40px;
   margin-top: 5px;
 }
-
+  
 .footer-address div {
-  width: 150px; 
+  width: 220px; 
   margin-top: 5px;
+
 }
 
 .footer-address h4 {
@@ -270,9 +271,10 @@ form input[type=submit] {
 }
 
 .footer-bottom {
-  background-color: #722a2a; 
+  background-color: #410907; 
   text-align: center;
   padding: 5px 0; 
   margin-top: 10px;
   font-size: 10px; 
 }
+

@@ -186,10 +186,10 @@
   padding-bottom: 20px;
   font-size: 2.4rem;
   font-weight: 700;
-  background: linear-gradient(45deg, #e63946, #ffb347);
+  color: #000000 !important;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Garantir que o elemento após o título também esteja centralizado */
@@ -859,8 +859,7 @@ transform: rotate(180deg);
 }
 /* Estilo italiano para o painel inferior - apenas na página Sobre Nós */
 .bottom-panel.tema-italiano {
-  background-color: #a37e5f; /* Marrom escuro de madeira */
-  background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+  background-color: #f9f5f0; 
   background-size: 100px;
   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
   border-top: 3px solid #e6c095; /* Borda dourada sutil */
@@ -945,8 +944,7 @@ transform: rotate(180deg);
 
 /* Estilo para os títulos dentro do painel italiano */
 .bottom-panel.tema-italiano .headline-central {
-  color: #ff5a5a;
-  text-shadow: 2px 2px 0 #df1d1d, 3px 0px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  color: #000000;
   font-weight: 700;
   letter-spacing: 1px;
   position: relative;
@@ -958,7 +956,7 @@ transform: rotate(180deg);
 }
 
 .bottom-panel.tema-italiano .headline-central::after {
-  ccontent: "";
+  content: "";
   position: absolute;
   bottom: 0;
   left: 25%;
@@ -1073,7 +1071,7 @@ transform: rotate(180deg);
 }
 
 .bottom-panel.tema-italiano .timeline-content h3 {
-    color: #009246; /* Vermelho italiano mais brilhante para legibilidade */
+    color: #2e7d32; /* Vermelho italiano mais brilhante para legibilidade */
   text-shadow: 
     1px 1px 0 #000,
     -1px -1px 0 #000,
