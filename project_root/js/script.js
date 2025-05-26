@@ -1297,3 +1297,195 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+// Aguarda o EmailJS carregar antes de inicializar
+function inicializarEmailJS() {
+    if (typeof emailjs !== 'undefined') {
+        console.log('EmailJS carregado com sucesso!');
+        // Substitua pela sua chave pública do EmailJS
+        emailjs.init("9UpfNm6FwZcwsTu9c");
+        return true;
+    } else {
+        console.log('EmailJS ainda não carregado...');
+        return false;
+    }
+}
+
+// Função para enviar email de boas-vindas
+function enviarEmailBoasVindas(email) {
+    if (typeof emailjs === 'undefined') {
+        console.error('EmailJS não está carregado!');
+        return Promise.reject('EmailJS não disponível');
+    }
+
+    const templateParams = {
+        to_email: email,
+        to_name: email.split('@')[0],
+        from_name: "Nostra Massa Pizzaria",
+        subject: "Bem-vindo ao Clube Nostra Massa! 🍕",
+        message: `Bem-vindo(a) ao Clube Nostra Massa! 🍕
+
+Obrigado por se juntar à nossa família italiana! Agora você faz parte de um clube exclusivo de amantes da verdadeira pizza italiana.
+
+Como membro do Clube Nostra Massa, você terá acesso a:
+
+🎯 Degustações exclusivas de novos sabores
+💰 15% de desconto em todas as compras  
+🎉 Convites para eventos gastronômicos especiais
+👨‍🍳 Receitas exclusivas do nosso chef italiano
+
+Fique de olho em seu email para receber nossas ofertas especiais e novidades!
+
+Buon appetito!
+Equipe Nostra Massa`
+    };
+
+    // Substitua pelos seus IDs do EmailJS
+    return emailjs.send('service_5gck5a5', 'template_90imnpo', templateParams);
+}
+
+// Função para salvar email localmente
+function salvarEmailLocalmente(email) {
+    let emails = JSON.parse(localStorage.getItem('clubeEmails') || '[]');
+    
+    const novoEmail = {
+        email: email,
+        dataRegistro: new Date().toISOString(),
+        timestamp: Date.now()
+    };
+    
+    const emailExiste = emails.some(item => item.email === email);
+    
+    if (!emailExiste) {
+        emails.push(novoEmail);
+        localStorage.setItem('clubeEmails', JSON.stringify(emails));
+        console.log('Email salvo localmente:', email);
+        return true;
+    }
+    return false;
+}
+
+// Função para mostrar mensagem
+function mostrarMensagem(tipo, mensagem) {
+    const elementoSucesso = document.getElementById('mensagem-sucesso');
+    const elementoErro = document.getElementById('mensagem-erro');
+    
+    if (elementoSucesso) elementoSucesso.style.display = 'none';
+    if (elementoErro) elementoErro.style.display = 'none';
+    
+    if (tipo === 'sucesso' && elementoSucesso) {
+        elementoSucesso.textContent = mensagem;
+        elementoSucesso.style.display = 'block';
+        setTimeout(() => elementoSucesso.style.display = 'none', 5000);
+    } else if (tipo === 'erro' && elementoErro) {
+        elementoErro.textContent = mensagem;
+        elementoErro.style.display = 'block';
+        setTimeout(() => elementoErro.style.display = 'none', 5000);
+    }
+}
+
+// Event listener principal
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM carregado...');
+    
+    // Aguarda o EmailJS carregar
+    let tentativas = 0;
+    const maxTentativas = 10;
+    
+    function aguardarEmailJS() {
+        if (inicializarEmailJS()) {
+            console.log('EmailJS inicializado!');
+            configurarFormulario();
+        } else if (tentativas < maxTentativas) {
+            tentativas++;
+            setTimeout(aguardarEmailJS, 500);
+        } else {
+            console.warn('EmailJS não carregou. Funcionará apenas salvamento local.');
+            configurarFormulario();
+        }
+    }
+    
+    aguardarEmailJS();
+});
+
+function configurarFormulario() {
+    const clubeForm = document.getElementById('clube-form');
+    const emailInput = document.getElementById('email-input');
+    
+    console.log('Configurando formulário...', clubeForm, emailInput);
+    
+    if (clubeForm && emailInput) {
+        console.log('Formulário encontrado! Adicionando event listener...');
+        
+        clubeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Formulário submetido!');
+            
+            const email = emailInput.value.trim();
+            console.log('Email:', email);
+            
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                mostrarMensagem('erro', 'Por favor, insira um email válido.');
+                return;
+            }
+
+            const submitBtn = clubeForm.querySelector('.btn-clube');
+            const textoOriginal = submitBtn.textContent;
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.disabled = true;
+
+            // Salva localmente
+            const emailSalvo = salvarEmailLocalmente(email);
+            
+            if (!emailSalvo) {
+                mostrarMensagem('erro', 'Este email já está cadastrado!');
+                submitBtn.textContent = textoOriginal;
+                submitBtn.disabled = false;
+                return;
+            }
+
+            // Tenta enviar email se EmailJS estiver disponível
+            if (typeof emailjs !== 'undefined') {
+                enviarEmailBoasVindas(email)
+                    .then(function(response) {
+                        console.log('Email enviado!', response);
+                        mostrarMensagem('sucesso', '✅ Email cadastrado com sucesso! Verifique sua caixa de entrada.');
+                        emailInput.value = '';
+                    })
+                    .catch(function(error) {
+                        console.error('Erro ao enviar email:', error);
+                        mostrarMensagem('erro', '❌ Erro ao enviar email. Mas seu cadastro foi salvo!');
+                    })
+                    .finally(function() {
+                        submitBtn.textContent = textoOriginal;
+                        submitBtn.disabled = false;
+                    });
+            } else {
+                // Apenas salvamento local
+                mostrarMensagem('sucesso', '✅ Email cadastrado com sucesso!');
+                emailInput.value = '';
+                submitBtn.textContent = textoOriginal;
+                submitBtn.disabled = false;
+            }
+        });
+    } else {
+        console.error('Formulário não encontrado!');
+    }
+}
+
+// Funções utilitárias
+function verEmailsCadastrados() {
+    const emails = JSON.parse(localStorage.getItem('clubeEmails') || '[]');
+    console.table(emails);
+    return emails;
+}
+
+function exportarEmails() {
+    const emails = JSON.parse(localStorage.getItem('clubeEmails') || '[]');
+    const dataStr = JSON.stringify(emails, null, 2);
+    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+    
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(dataBlob);
+    link.download = 'clube-emails-' + new Date().toISOString().split('T')[0] + '.json';
+    link.click();
+}

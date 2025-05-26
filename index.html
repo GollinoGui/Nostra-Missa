@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="project_root/css/style.css" />
   <link rel="stylesheet" href="project_root/css/home.css" />
   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
 </head>
 <body>
@@ -29,12 +30,7 @@
   <!-- HERO INTERATIVO -->
   <section class="hero-section">
     <div class="hero-content fade-in">
-      <h1>Descubra o <span class="verde">Sabor</span> da <span class="vermelho">Itália</span></h1>
-      <p>Uma experiência gastronômica que transporta você diretamente para Nápoles</p>
-      <div class="hero-buttons">
-        <a href="cardapio.html" class="btn-hero">Explorar Sabores</a>
-        <a href="contato.html" class="btn-hero btn-transparent">Encontre-nos</a>
-      </div>
+      
     </div>
     <div class="hero-interactive">
       <div class="pizza-builder">
@@ -237,22 +233,22 @@
     </div>
     <div class="sazonal-grid">
       <div class="sazonal-item">
-        <img src="project_root/assets/Pizza50.jpg" alt="Pizza de Funghi">
-        <h3>Funghi Porcini</h3>
-        <p>Cogumelos porcini frescos, mussarela de búfala e azeite trufado.</p>
-        <span class="sazonal-preco">R$ 89,90</span>
+        <img src="project_root/assets/Pizza80.jpg" alt="Pizza de Funghi">
+        <h3>Alcatra(Charmosa)</h3>
+        <p>Molho de tomates frescos, muçarela, Alcatra, gorgonzola, cebola roxa marinada no balsâmico e mel, orégano e azeitonas</p>
+        <span class="sazonal-preco">R$ 87,90</span>
       </div>
       <div class="sazonal-item">
-        <img src="project_root/assets/Pizza28.jpg" alt="Pizza de Figo">
-        <h3>Figo com Gorgonzola</h3>
-        <p>Figos caramelizados, gorgonzola cremoso e nozes tostadas.</p>
-        <span class="sazonal-preco">R$ 92,90</span>
+        <img src="project_root/assets/Pizza49.jpg" alt="Pizza de Figo">
+        <h3>Califórnia</h3>
+        <p>Molho tomates frescos, muçarela, lombinho, pêssego, abacaxi, figo, ameixa e cereja</p>
+        <span class="sazonal-preco">R$ 86,90</span>
       </div>
       <div class="sazonal-item">
-        <img src="project_root/assets/Pizza49.jpg" alt="Pizza de Abóbora">
-        <h3>Abóbora e Sálvia</h3>
-        <p>Abóbora assada, sálvia fresca, ricota e mel trufado.</p>
-        <span class="sazonal-preco">R$ 85,90</span>
+        <img src="project_root/assets/Pizza44.jpg" alt="Pizza de Abóbora">
+        <h3>Brócolis Com Requeijão</h3>
+        <p>Molho tomates frescos, muçarela, brócolis, requeijão cremoso, azeitonas</p>
+        <span class="sazonal-preco">R$ 78,90</span>
       </div>
     </div>
     <div class="sazonal-nota">
@@ -270,10 +266,19 @@
         <li><i class="fas fa-check-circle"></i> Convites para eventos gastronômicos</li>
         <li><i class="fas fa-check-circle"></i> Receitas exclusivas do nosso chef</li>
       </ul>
-      <form class="clube-form">
-        <input type="email" placeholder="Seu melhor e-mail" required>
-        <button type="submit" class="btn-clube">Participar</button>
-      </form>
+      <!-- Substitua este trecho nas linhas 182-185 -->
+<form class="clube-form" id="clube-form">
+  <input type="email" id="email-input" placeholder="Seu melhor e-mail" required>
+  <button type="submit" class="btn-clube">Participar</button>
+</form>
+<div id="mensagem-sucesso" style="display: none; color: #2e7d32; text-align: center; margin-top: 1rem; font-weight: bold;">
+  ✅ Email cadastrado com sucesso! Verifique sua caixa de entrada.
+</div>
+<div id="mensagem-erro" style="display: none; color: #d73427; text-align: center; margin-top: 1rem; font-weight: bold;">
+  ❌ Erro ao enviar email. Tente novamente.
+</div>
+
+
     </div>
     <div class="clube-imagem">
       <img src="project_root/assets/clubedapizza.png" alt="Clube da Pizza">
@@ -307,5 +312,7 @@
   <!-- Scripts -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="project_root/js/script.js"></script>
+  <!-- Adicione antes do fechamento do </body> -->
+  
 </body>
 </html>
