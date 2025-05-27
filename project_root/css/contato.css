@@ -122,16 +122,6 @@ form input[type=submit] {
   z-index: 999;
 }
 
-@media (max-width: 768px) {
-  .contact-box-fixed {
-    position: static;
-    width: 90%;
-    margin: 20px auto;
-    top: auto;
-    right: auto;
-  }
-}
-
 /* INFORMATIVO DUAS CAIXAS VERMELHA E VERDE */
 .info-dupla {
   display: flex;
@@ -166,13 +156,11 @@ form input[type=submit] {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 119px; 
+  gap: 116px; 
 }
 .coluna-esquerda .item i {
   font-size: 30px; /* Aumenta os ícones */
-  
 }
-
 
 .item { 
   display: flex;
@@ -206,19 +194,6 @@ form input[type=submit] {
   font-size: 18px;
 }
 
-@media (max-width: 768px) {
-  .info-dupla {
-    flex-direction: column;
-    width: 90%;
-    margin: 20px auto;
-  }
-
-  .coluna-esquerda,
-  .coluna-direita {
-    width: 100%;
-  }
-}
-
 /* Rodapé */
 .footer {
   background-color: #84100B; 
@@ -240,16 +215,21 @@ form input[type=submit] {
   margin: 0 auto;
 }
 
+.footer-links i{/*ICONES DOS LINKS*/
+  margin-right: 8px;
+}
+
 .footer-links {
-  display: flex;
   gap: 15px;
   margin-left: -160px;
 }
 
 .footer-links a {
   text-decoration: none;
+  display: block;
   color: #fff;
-  font-size: 20px; 
+  font-size: 24px; 
+  margin-top: 12px;
   font-weight: bolder;
 }
 
@@ -277,4 +257,6 @@ form input[type=submit] {
   margin-top: 10px;
   font-size: 10px; 
 }
+
+
 

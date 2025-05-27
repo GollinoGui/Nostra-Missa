@@ -98,9 +98,9 @@ body::before {
     height: 100%;
     background-image: url('../assets/imagemfundo.jpeg');
     background-repeat: no-repeat;
-    background-size: 110% 110%;
-    background-position: center;
-    transform: translateY(100px); /* empurra pra baixo 100px */
+    background-size: cover; 
+    background-position: top center;
+    transform: none; /* remove o empurrão de 100px */
     z-index: -1;
 }
 
@@ -142,6 +142,7 @@ body::before {
 
 .logo img {
   height: 150px;
+  width: auto;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
@@ -361,51 +362,6 @@ body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body
     animation: fadeInAnimation 1s forwards;
 }
 
-@media (max-width: 768px) {
-  .top-bar {
-    flex-direction: column;
-    align-items: center;
-    height: auto;
-    padding: 20px;
-  }
-
-  .logo-container {
-    justify-content: center;
-    margin: 0 auto;
-  }
-
-  .logo {
-    transform: translateY(20px);
-  }
-
-  .logo img {
-    height: 100px;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    margin-top: 20px;
-  }
-
-  .nav-links a {
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
-  }
-
-  .divider {
-    display: none;
-  }
-
-  .bottom-bar {
-    flex-direction: column;
-    height: auto;
-    padding: 20px;
-  }
-}
-
-
 :root {
     --primary-color: #162c0a;
     --hover-color: #010e00;
@@ -521,4 +477,3 @@ html, body {
     overflow-x: hidden !important;
     max-width: 100vw;
   }
-  

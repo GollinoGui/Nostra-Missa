@@ -95,3 +95,12 @@
 .unidade-bloco.reverse {
   flex-direction: row-reverse;
 }
+
+body.unidades-page {
+  background-image: url('project_root/assets/sua-imagem.jpg');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% auto;
+  background-color: #fef6e4;
+}
+

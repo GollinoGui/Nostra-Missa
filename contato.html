@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contato - Nostra Massa</title>
@@ -10,6 +11,10 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="project_root/css/style.css" />
   <link rel="stylesheet" href="project_root/css/contato.css" />
+  <link rel="stylesheet" href="project_root/css/responsivo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
 </head>
 <body>
 
@@ -33,10 +38,6 @@
   <!-- INFORMAÇÕES VERDE / VERMELHO -->
   <div class="info-dupla">
     <div class="coluna-esquerda">
-      <div class="item">
-        <i class="fas fa-phone-alt"></i>
-        <span>LIGUE PARA NÓS</span>
-      </div>
       <div class="item item-localizacao">
         <i class="fas fa-map-marker-alt"></i>
         <span>LOCALIZAÇÃO</span>
@@ -45,43 +46,53 @@
         <i class="fas fa-clock"></i>
         <span>HORÁRIO COMERCIAL</span>
       </div>
+      <div class="item">
+        <i class="fas fa-phone-alt"></i>
+        <span>LIGUE PARA NÓS</span>
+      </div>
+      
+      
     </div>
 
     <div class="coluna-direita">
       <div class="item">
-        <p>1 (234) 567-891, 1 (234) 987-654</p>
+        <p style="font-size: 20px">Av. Rita Cândida Nogueira, 481, Cravinhos, SP, Brasil</p>
       </div>
       <div class="item">
-        <p>121 Rock Street, 21 Avenue, New York, NY 92103-9000</p>
+        <p style="font-size: 20px">Todos os dias 18h-23h</p>
       </div>
       <div class="item">
-        <p>Todos os dias 18h-23h</p>
+        <p style="font-size: 20px">(16) 3482-2555</p>
       </div>
     </div>
   </div>
 
   <!-- FORMULÁRIO FIXO -->
-  <section class="form-container">
-    <div class="contact-box-fixed">
-      <form>
-        <h1>CONTATE-NOS</h1>
-        <p>Preencha as informações abaixo e entraremos em contato com você!</p>
-        <div class="input-single">
-          <input class="input" type="text" id="nome" required>
-          <label for="nome">Seu nome completo</label>
-        </div>
-        <div class="input-single">
-          <input class="input" type="text" id="email" required>
-          <label for="email">Seu e-mail</label>
-        </div>
-        <div class="input-single">
-          <input class="input" type="text" id="telefone" required>
-          <label for="telefone">Seu telefone</label>
-        </div>
-        <input type="submit" value="enviar" class="btn"></div>
-      </form>
-    </div>
-  </section>
+<section class="form-container">
+  <div class="contact-box-fixed">
+    <form action="http://localhost:5000/enviar" method="POST">
+      <h1>CONTATE-NOS</h1>
+      <p>Preencha as informações abaixo e entraremos em contato com você!</p>
+
+      <div class="input-single">
+        <input class="input" type="text" id="nome" name="nome" required>
+        <label for="nome">Seu nome completo</label>
+      </div>
+
+      <div class="input-single">
+        <input class="input" type="email" id="email" name="email" required>
+        <label for="email">Seu e-mail</label>
+      </div>
+
+      <div class="input-single">
+        <input class="input" type="text" id="mensagem" name="mensagem" required>
+        <label for="mensagem">Sua mensagem</label>
+      </div>
+      
+      <input type="submit" value="enviar" class="btn">
+    </form>
+  </div>
+</section>
 
   <!-- Scripts -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -94,9 +105,9 @@
   <div class="footer-container">
     
     <div class="footer-links">
-      <a href="https://www.facebook.com/NostraMassaCravinhos">Facebook</a>
-      <a href="https://www.instagram.com/NostraMassaCravinhos">Instagram</a>
-      <a href="mailto:admin@nostramassa.com">Email</a>
+      <a href="https://www.facebook.com/NostraMassaCravinhos" target =" _blank"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="https://www.instagram.com/NostraMassaCravinhos" target =" _blank"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://wa.me/5516992380676" target =" _blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
     </div>
 
     <div class="footer-address">
