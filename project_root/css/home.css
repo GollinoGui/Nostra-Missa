@@ -102,6 +102,295 @@ body {
   align-items: center;
 }
 
+/* NOVA SEÇÃO: QUEM SOMOS */
+.quem-somos {
+  padding: 4rem 2rem;
+  background-color: #f9f5f0;
+}
+
+.quem-somos-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.quem-somos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.sobre-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sobre-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, #2e7d32, #d73427);
+}
+
+.sobre-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.sobre-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #d73427, #2e7d32);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.sobre-card:hover .sobre-icon {
+  transform: scale(1.1);
+}
+
+.sobre-icon i {
+  font-size: 2rem;
+  color: white;
+}
+
+.sobre-card h3 {
+  color: #2e7d32;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.sobre-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* NOVA SEÇÃO: ESTATÍSTICAS */
+.estatisticas-home {
+  padding: 4rem 2rem;
+  background-color: #fff;
+}
+
+.estatisticas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto 0;
+}
+
+.estatistica-card {
+  background-color: #f9f5f0;
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.estatistica-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #008C45, #F4F9FF, #CD212A);
+}
+
+.estatistica-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+.estatistica-icon {
+  font-size: 2.5rem;
+  color: #d73427;
+  margin-bottom: 1rem;
+}
+
+.contador {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 15px 0;
+  color: #2e7d32;
+  display: block;
+}
+
+.estatistica-card p {
+  color: #666;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* NOVA SEÇÃO: TIMELINE */
+.nossa-jornada {
+  padding: 4rem 2rem;
+  background-color: #f9f5f0;
+}
+
+.timeline-home {
+  max-width: 1000px;
+  margin: 2rem auto 0;
+  position: relative;
+}
+
+.timeline-home::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #2e7d32, #d73427);
+  transform: translateX(-50%);
+}
+
+.timeline-item-home {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.timeline-item-home:nth-child(odd) {
+  flex-direction: row;
+}
+
+.timeline-item-home:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.timeline-year {
+  background: linear-gradient(135deg, #d73427, #2e7d32);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  min-width: 80px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-content-home {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 15px;
+  margin: 0 2rem;
+  flex: 1;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.timeline-content-home:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-content-home h3 {
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.timeline-content-home p {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* NOVA SEÇÃO: DEPOIMENTOS */
+.depoimentos-home {
+  padding: 4rem 2rem;
+  background-color: #fff;
+}
+
+.depoimentos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto 0;
+}
+
+.depoimento-card {
+  background-color: #f9f5f0;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.depoimento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, #d73427, #2e7d32);
+}
+
+.depoimento-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.depoimento-texto {
+  margin-bottom: 1.5rem;
+}
+
+.depoimento-texto i {
+  font-size: 2rem;
+  color: #d73427;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.depoimento-texto p {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.depoimento-autor {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 1rem;
+}
+
+.depoimento-autor strong {
+  color: #2e7d32;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.depoimento-autor span {
+  color: #666;
+  font-size: 0.9rem;
+}
+
 .pizza-builder {
   position: relative;
   width: 350px;

@@ -798,15 +798,7 @@ transform: rotate(180deg);
   }
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  .galeria-container,
-  .equipe-container {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  }
-  
- 
-}
+
 
 
 /* Melhorias nas estatísticas */

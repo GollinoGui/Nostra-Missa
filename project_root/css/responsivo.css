@@ -70,4 +70,147 @@
   .container-unidades {
     margin-top: 64px;
   }
+
+  /* ========== AJUSTES DA PÁGINA UNIDADES ========== */
+  .unidade-bloco,
+  .unidade-bloco.reverse {
+    flex-direction: column !important;
+    align-items: stretch;
+  }
+
+  .unidade-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+  }
+
+  .unidade-item.mapa iframe,
+  .unidade-item.foto img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .unidade-item.dados {
+    padding: 16px;
+    font-size: 0.9rem;
+    text-align: center;
+    align-items: center;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    hyphens: none;
+  }
+
+  .unidade-item.dados p {
+    font-size: 0.95rem;
+  }
+
+  .unidade-item.dados h2 {
+    font-size: 1.6rem;
+  }
+
+  .titulo-unidades {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  /* ========== AJUSTES DA PÁGINA DE CONTATO ========== */
+  .info-dupla {
+  flex-direction: column;
+  width: 90%;
+  margin: 100px auto 30px auto;
+  padding: 10px;
+  height: auto;
+  left: 0;
+  top: 0;
+  }
+
+  .coluna-esquerda,
+  .coluna-direita {
+  width: 100%;
+  padding: 20px 16px;
+  gap: 32px; /* menor espaçamento vertical entre os itens */
+  }
+
+  .coluna-esquerda .item i {
+  font-size: 20px; /* ícones menores */
+  }
+
+  .item span {
+  font-size: 16px; /* texto menor */
+  }
+
+  .item p {
+  font-size: 15px; /* texto reduzido */
+  }
+
+  .contact-box-fixed {
+    position: static;
+    width: 90%;
+    margin: 20px auto;
+    top: auto;
+    right: auto;
+  }
+
+  form {
+  margin-left: 0 !important;
+  margin-top: 20px;
+  max-width: 100%;
+  padding: 40px 20px 60px;
+  background-size: cover;
+  background-position: center;
+  }
+
+  /* ========== FOOTER ============ */
+
+  .footer {
+    position: static;
+  }
+
+  .footer-container {
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  }
+
+  .footer-links {
+  margin-left: 0 !important; /* ESSENCIAL */
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0 16px;
+  text-align: center;
+  display: flex;
+  gap: 12px;
+  }
+
+  .footer-links a {
+  display: inline-block;
+  font-size: 1rem;
+  padding: 4px 8px;
+  }
+
+  .footer-address {
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  padding: 0 16px;
+  }
+
+  .footer-address div {
+  width: 100%;
+  text-align: center;
+  }
+
+  .footer-bottom {
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 10px 0;
+  }
 }

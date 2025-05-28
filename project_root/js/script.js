@@ -7,163 +7,241 @@ function getCurrentPage() {
   if (path.includes('contato.html')) return 'contato';
   return 'home'; // index.html ou raiz
 }
-let sobreNosEnhancementsLoaded = false;
+
 
 // Elementos do painel inferior
 const bottomPanel = document.getElementById('bottomPanel');
 const expandButton = document.getElementById('expandButton');
 let isPanelOpen = false;
 
-function corrigirEstilosCabecalho() {
-  // Corrigir o estilo do cabeçalho "Quem Somos"
-  const cabecalhos = document.querySelectorAll('.headline-central, h2');
-  cabecalhos.forEach(cabecalho => {
-    // Resetar estilos que podem estar causando o problema
-    cabecalho.style.transform = 'none';
-    cabecalho.style.textAlign = 'center';
-    cabecalho.style.margin = '0px';
-    cabecalho.style.position = 'relative';
-  });
-}
 
-// Adicione esta função para corrigir a visibilidade do conteúdo
-function corrigirVisibilidadeConteudo() {
-  if (!bottomPanel) return;
-  
-  // Forçar visibilidade do conteúdo
-  const panelContent = document.getElementById('panelContent');
-  if (panelContent) {
-    // Garantir que o conteúdo seja visível
-    panelContent.style.opacity = '1';
-    panelContent.style.visibility = 'visible';
-    panelContent.style.display = 'block';
-    panelContent.style.padding = '0px';
-    panelContent.style.color = '#ffffff'; // Forçar cor branca para o texto
-    
-    // Verificar todos os elementos filhos e garantir que sejam visíveis
-    Array.from(panelContent.children).forEach(child => {
-      child.style.opacity = '1';
-      child.style.visibility = 'visible';
-      child.style.display = 'block';
-    });
-    
-    // Corrigir estilos do cabeçalho
-    corrigirEstilosCabecalho();
-    
-    console.log('Visibilidade do conteúdo corrigida');
-  }
-}
 
-// Função para alternar o painel
-function togglePanel() {
-  isPanelOpen = !isPanelOpen;
-  bottomPanel.classList.toggle('open', isPanelOpen);
-  expandButton.setAttribute('aria-expanded', isPanelOpen);
-  
-  // Muda o texto do botão dependendo do estado
-  if (isPanelOpen) {
-    expandButton.textContent = '▼ Arraste para fechar';
-    // Corrigir visibilidade quando o painel é aberto
-    setTimeout(() => {
-      corrigirVisibilidadeConteudo();
-      initGaleria(); // Adicione esta linha para inicializar a galeria quando o painel for aberto
-      reinicializarSwiper();
-    }, 300); // Aguardar a animação
-    
-    // Reiniciar a animação dos contadores quando o painel é aberto
-    // (apenas se estiver na página sobre nós)
-    if (getCurrentPage() === 'sobre') {
-      animarContadores();
-    }
-  } else {
-    expandButton.textContent = '▲ Arraste para explorar mais';
-    
-    // Resetar os contadores para zero quando o painel for fechado
-    // (apenas se estiver na página sobre nós)
-    if (getCurrentPage() === 'sobre') {
-      const contadores = document.querySelectorAll('.contador');
-      contadores.forEach(contador => {
-        contador.textContent = '0';
-      });
-    }
-  }
-  initSwiper();
-}
 
-// Função separada para animar os contadores de forma controlada
 function animarContadores() {
-  const contadores = document.querySelectorAll('.contador');
-  
-  contadores.forEach(contador => {
-    // Obter o valor final do contador
+  document.querySelectorAll('.contador').forEach((contador) => {
     const valorFinal = parseInt(contador.getAttribute('data-target'));
-    if (isNaN(valorFinal)) return;
-    
-    // Resetar para zero
-    contador.textContent = '0';
-    
-    // Definir a duração da animação
-    const duracao = 2000; // 2 segundos
-    const inicioAnimacao = Date.now();
-    
-    // Usar requestAnimationFrame para uma animação mais suave
-    function atualizarContador() {
-      // Calcular o tempo decorrido
-      const tempoDecorrido = Date.now() - inicioAnimacao;
-      const progresso = Math.min(tempoDecorrido / duracao, 1);
+    if (!isNaN(valorFinal)) {
+      contador.textContent = '0';
       
-      // Calcular o valor atual com base no progresso
-      const valorAtual = Math.floor(progresso * valorFinal);
+      const duracao = 2000;
+      const inicioAnimacao = Date.now();
       
-      // Atualizar o texto do contador
-      contador.textContent = valorAtual;
-      
-      // Continuar a animação se não estiver completa
-      if (progresso < 1) {
-        requestAnimationFrame(atualizarContador);
-      } else {
-        // Garantir que o valor final seja exato
-        contador.textContent = valorFinal;
+      function atualizarContador() {
+        const tempoDecorrido = Date.now() - inicioAnimacao;
+        const progresso = Math.min(tempoDecorrido / duracao, 1);
+        const valorAtual = Math.floor(progresso * valorFinal);
+        
+        contador.textContent = valorAtual;
+        
+        if (progresso < 1) {
+          requestAnimationFrame(atualizarContador);
+        } else {
+          contador.textContent = valorFinal;
+        }
       }
+      
+      requestAnimationFrame(atualizarContador);
     }
-    
-    // Iniciar a animação
-    requestAnimationFrame(atualizarContador);
   });
 }
 
-
-// Adiciona evento de clique ao botão de expandir
-if (expandButton) {
-  expandButton.addEventListener('click', togglePanel);
-}
-
-// Evento de rolagem para abrir/fechar o painel
-window.addEventListener('wheel', (e) => {
-  if (!bottomPanel) return;
-  
-  // Se o usuário estiver rolando dentro do painel, não faça nada
-  if (bottomPanel.contains(e.target)) return;
-  
-  const atTop = window.scrollY <= 30;
-  
-  // Rolando para baixo e o painel está fechado -> abre o painel
-  if (e.deltaY > 0 && !isPanelOpen) {
-    togglePanel();
-  }
-  
-  // Rolando para cima e o painel está aberto e estamos no topo da página -> fecha o painel
-  if (e.deltaY < 0 && isPanelOpen && atTop) {
-    togglePanel();
+document.addEventListener('DOMContentLoaded', function() {
+  if (getCurrentPage() === 'home') {
+    // Aguardar um pouco e então animar
+    setTimeout(() => {
+      animarContadores();
+    }, 1000);
   }
 });
+
+
+
+// Função para inicializar contadores da home quando a seção fica visível
+function initContadoresHome() {
+  const currentPage = getCurrentPage();
+  if (currentPage !== 'home') return;
+  
+  console.log('Inicializando contadores da home...');
+  
+  const estatisticasSection = document.querySelector('.estatisticas-home');
+  if (!estatisticasSection) {
+    console.log('Seção de estatísticas não encontrada');
+    return;
+  }
+  
+  // Criar um observer para detectar quando a seção entra na viewport
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        console.log('Seção de estatísticas entrou na viewport');
+        // Pequeno delay para dar tempo da seção aparecer completamente
+        setTimeout(() => {
+          animarContadoresHome();
+        }, 300);
+        // Parar de observar após a primeira animação
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.2, // Animar quando 20% da seção estiver visível
+    rootMargin: '0px 0px -100px 0px' // Margem para começar a animação um pouco antes
+  });
+  
+  observer.observe(estatisticasSection);
+}
+
+// Função para verificar se os contadores já estão visíveis ao carregar a página
+function verificarContadoresVisiveis() {
+  const currentPage = getCurrentPage();
+  if (currentPage !== 'home') return;
+  
+  // Aguardar um pouco para garantir que a página carregou completamente
+  setTimeout(() => {
+    const estatisticasSection = document.querySelector('.estatisticas-home');
+    if (!estatisticasSection) {
+      console.log('Seção de estatísticas não encontrada ao verificar visibilidade');
+      return;
+    }
+    
+    // Verificar se a seção já está visível na tela
+    const rect = estatisticasSection.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    
+    console.log('Seção visível ao carregar:', isVisible);
+    
+    if (isVisible) {
+      // Se já estiver visível, animar imediatamente
+      setTimeout(() => {
+        animarContadoresHome();
+      }, 500);
+    } else {
+      // Se não estiver visível, usar o observer
+      initContadoresHome();
+    }
+  }, 1000); // Aguardar 1 segundo após o carregamento da página
+}
 
 // Função para alternar o modo escuro
 function toggleDarkMode() {
   document.body.classList.toggle('dark-mode');
   document.querySelector('.top-bar')?.classList.toggle('dark-mode');
-  if (bottomPanel) bottomPanel.classList.toggle('dark-mode');
 }
+
+// Inicialização quando a página carrega
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM carregado, página:', getCurrentPage());
+  
+  // Inicializar contadores da home
+  if (getCurrentPage() === 'home') {
+    verificarContadoresVisiveis();
+  }
+});
+
+// Também inicializar quando a janela carrega completamente
+window.addEventListener('load', function() {
+  console.log('Janela carregada completamente, página:', getCurrentPage());
+  
+  // Backup: tentar inicializar contadores novamente se for a home
+  if (getCurrentPage() === 'home') {
+    setTimeout(() => {
+      const estatisticasSection = document.querySelector('.estatisticas-home');
+      if (estatisticasSection) {
+        const contadores = estatisticasSection.querySelectorAll('.contador');
+        // Se os contadores ainda estão em 0, animar
+        const precisaAnimar = Array.from(contadores).some(contador => 
+          contador.textContent === '0' || contador.textContent === ''
+        );
+        
+        if (precisaAnimar) {
+          console.log('Executando animação de backup dos contadores');
+          animarContadoresHome();
+        }
+      }
+    }, 2000);
+  }
+});
+function testarContadores() {
+  console.log('=== TESTE DE CONTADORES ===');
+  console.log('Página atual:', getCurrentPage());
+  
+  const contadoresGeral = document.querySelectorAll('.contador');
+  console.log('Contadores encontrados:', contadoresGeral.length);
+  
+  contadoresGeral.forEach((contador, index) => {
+    console.log(`Contador ${index + 1}:`, {
+      elemento: contador,
+      dataTarget: contador.getAttribute('data-target'),
+      textoAtual: contador.textContent
+    });
+  });
+  
+  // Forçar animação
+  contadoresGeral.forEach((contador) => {
+    const valorFinal = parseInt(contador.getAttribute('data-target'));
+    if (!isNaN(valorFinal)) {
+      contador.textContent = '0';
+      
+      const duracao = 2000;
+      const inicioAnimacao = Date.now();
+      
+      function atualizarContador() {
+        const tempoDecorrido = Date.now() - inicioAnimacao;
+        const progresso = Math.min(tempoDecorrido / duracao, 1);
+        const valorAtual = Math.floor(progresso * valorFinal);
+        
+        contador.textContent = valorAtual;
+        
+        if (progresso < 1) {
+          requestAnimationFrame(atualizarContador);
+        } else {
+          contador.textContent = valorFinal;
+        }
+      }
+      
+      requestAnimationFrame(atualizarContador);
+    }
+  });
+}
+
+window.testarContadores = testarContadores;
+// Função para reinicializar contadores (caso necessário)
+function reiniciarContadores() {
+  if (getCurrentPage() === 'home') {
+    animarContadoresHome();
+  }
+}
+
+// Expor função globalmente para debug
+window.reiniciarContadores = reiniciarContadores;
+window.animarContadoresHome = animarContadoresHome;
+
+// Função para testar contadores manualmente
+// Também inicializar quando a janela carrega completamente
+window.addEventListener('load', function() {
+  console.log('Janela carregada completamente, página:', getCurrentPage());
+  
+  // Backup: tentar inicializar contadores novamente se for a home
+  if (getCurrentPage() === 'home') {
+    setTimeout(() => {
+      const estatisticasSection = document.querySelector('.estatisticas-home');
+      if (estatisticasSection) {
+        const contadores = estatisticasSection.querySelectorAll('.contador');
+        // Se os contadores ainda estão em 0, animar
+        const precisaAnimar = Array.from(contadores).some(contador => 
+          contador.textContent === '0' || contador.textContent === ''
+        );
+        
+        if (precisaAnimar) {
+          console.log('Executando animação de backup dos contadores');
+          animarContadoresHome();
+        }
+      }
+    }, 2000);
+  }
+});
+
+
+
 
 
 // Solução simplificada com CSS
@@ -240,83 +318,6 @@ function carregarConteudoEspecifico() {
         }, 300);
         return;
       }
-      
-      // Caso contrário, carregue o conteúdo básico
-      panelContent.innerHTML = `
-        <section class="sobre-nos fade-in">
-          <div class="container">
-            <h2 class="headline-central">Quem Somos</h2>
-            <div class="accordion">
-              <div class="accordion-item">
-                <button class="accordion-header"><i class="fa fa-history"></i>Nossa História</button>
-                <div class="accordion-body">
-                  <p>Fundada em 2016 no coração de Cravinhos, a <strong>Nostra Massa</strong> nasceu da paixão por pizza e pelo desejo de criar experiências memoráveis...</p>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <button class="accordion-header"><i class="fa fa-pizza-slice"></i> Nosso Jeito</button>
-                <div class="accordion-body">
-                  <p>Utilizamos <strong>massas de fermentação lenta</strong>, ingredientes frescos e combinações que equilibram tradição e criatividade...</p>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <button class="accordion-header"><i class="fa fa-users"></i>Nossa Conexão</button>
-                <div class="accordion-body">
-                  <p>Com um ambiente acolhedor e equipe apaixonada, nos tornamos parte da rotina de muitos moradores...</p>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <button class="accordion-header"><i class="fa fa-heart"></i> Mais que Pizza</button>
-                <div class="accordion-body">
-                  <p>Seja no salão, delivery ou retirada, cada pedido é uma entrega de carinho e cuidado...</p>
-                </div>
-              </div>
-            </div>
-
-              <div class="estatisticas-section">
-        <h3 class="headline-central">Nostra Massa em Números</h3>
-        <div class="estatisticas-container">
-          <div class="estatistica-item">
-            <div class="estatistica-icon">🍕</div>
-            <div class="contador" data-target="15000">0</div>
-            <p>Pizzas por Mês</p>
-          </div>
-          <div class="estatistica-item">
-            <div class="estatistica-icon">👨‍🍳</div>
-            <div class="contador" data-target="25">0</div>
-            <p>Colaboradores</p>
-          </div>
-          <div class="estatistica-item">
-            <div class="estatistica-icon">🌟</div>
-            <div class="contador" data-target="35">0</div>
-            <p>Sabores</p>
-          </div>
-          <div class="estatistica-item">
-            <div class="estatistica-icon">🏆</div>
-            <div class="contador" data-target="9">0</div>
-            <p>Anos de História</p>
-          </div>
-        </div>
-      </div>
-  
-
-            <div class="sobre-nos-grid">
-              <div class="sobre-item"><h3>🍕 Pizza Artesanal</h3><p>Ingredientes frescos, massas leves e sabores que surpreendem.</p></div>
-              <div class="sobre-item"><h3>🧡 Atendimento com Carinho</h3><p>Equipe acolhedora, pronta para fazer você se sentir em casa.</p></div>
-              <div class="sobre-item"><h3>🏡 Orgulho Local</h3><p>Desde Cravinhos para a região, mantendo sempre nossa essência.</p></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="depoimentos fade-in">
-          
-        </section>
-      `
-      
-        
-        
-    
-      break;
       
     case 'cardapio':
       panelContent.innerHTML = `
@@ -673,87 +674,6 @@ if (!document.querySelector('.galeria-modal')) {
   document.body.appendChild(debugButton);
 }); 
 
-// Adicione esta função após o carregamento do documento
-function setupUtensils() {
-  // Verificar se os elementos dos talheres existem
-  const leftUtensil = document.querySelector('.left-utensil');
-  const rightUtensil = document.querySelector('.right-utensil');
-  
-  if (!leftUtensil || !rightUtensil) {
-    console.log('Elementos dos talheres não encontrados');
-    return;
-  }
-  
-  console.log('Talheres encontrados e configurados');
-  
-  // Atualizar a posição dos talheres quando o painel mudar
-  const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.attributeName === 'class') {
-        const isPanelOpen = bottomPanel.classList.contains('open');
-        leftUtensil.classList.toggle('panel-open', isPanelOpen);
-        rightUtensil.classList.toggle('panel-open', isPanelOpen);
-      }
-    });
-  });
-  
-  observer.observe(bottomPanel, { attributes: true });
-}
-function addDecorativeUtensils() {
-  // Verificar se os talheres já existem na página
-  if (document.querySelector('.utensil')) {
-    return; // Talheres já existem, não precisa adicionar novamente
-  }
-  const bottomPanel = document.getElementById('bottomPanel');
-  if (!bottomPanel) {
-    console.log('Bottom panel não encontrado, adiando adição dos talheres');
-    // Tentar novamente em breve
-    setTimeout(addDecorativeUtensils, 100);
-    return;
-  }
-  
-  // Criar o garfo (lado esquerdo)
-  const leftUtensil = document.createElement('div');
-  leftUtensil.className = 'utensil left-utensil';
-  const leftImg = document.createElement('img');
-  leftImg.src = 'project_root/assets/fork.png';
-  leftImg.alt = 'Garfo decorativo';
-  leftUtensil.appendChild(leftImg);
-  
-  // Criar a faca (lado direito)
-  const rightUtensil = document.createElement('div');
-  rightUtensil.className = 'utensil right-utensil';
-  const rightImg = document.createElement('img');
-  rightImg.src = 'project_root/assets/knife.png'; // Substitua por knife.png quando disponível
-  rightImg.alt = 'Faca decorativa';
-  rightUtensil.appendChild(rightImg);
-  
-  // Adicionar os talheres ao body
-  document.body.appendChild(leftUtensil);
-  document.body.appendChild(rightUtensil);
-  
-  console.log('Talheres decorativos adicionados à página');
-  const observer = new MutationObserver((mutations, obs) => {
-    // Verificar se o painel está visível
-    if (bottomPanel && bottomPanel.offsetHeight > 0) {
-      // Sincronizar a aparição dos talheres com o bottom panel
-      setTimeout(() => {
-        leftUtensil.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out, bottom 0.6s ease-out';
-        rightUtensil.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out, bottom 0.6s ease-out';
-        
-        leftUtensil.style.opacity = '0.95';
-        rightUtensil.style.opacity = '0.95';
-        
-        // Se o painel já estiver aberto, posicionar os talheres adequadamente
-        if (bottomPanel.classList.contains('open')) {
-          leftUtensil.classList.add('panel-open');
-          rightUtensil.classList.add('panel-open');
-        }
-      }, 300); // Pequeno atraso para sincronizar com a animação do painel
-      
-      obs.disconnect(); // Parar de observar após a animação
-    }
-  });
 
 // Observar mudanças no DOM que possam afetar a visibilidade do painel
   observer.observe(document.body, { 
