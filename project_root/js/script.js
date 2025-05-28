@@ -9,10 +9,7 @@ function getCurrentPage() {
 }
 
 
-// Elementos do painel inferior
-const bottomPanel = document.getElementById('bottomPanel');
-const expandButton = document.getElementById('expandButton');
-let isPanelOpen = false;
+
 
 
 
@@ -56,76 +53,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-// Função para inicializar contadores da home quando a seção fica visível
-function initContadoresHome() {
-  const currentPage = getCurrentPage();
-  if (currentPage !== 'home') return;
-  
-  console.log('Inicializando contadores da home...');
-  
-  const estatisticasSection = document.querySelector('.estatisticas-home');
-  if (!estatisticasSection) {
-    console.log('Seção de estatísticas não encontrada');
-    return;
-  }
-  
-  // Criar um observer para detectar quando a seção entra na viewport
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        console.log('Seção de estatísticas entrou na viewport');
-        // Pequeno delay para dar tempo da seção aparecer completamente
-        setTimeout(() => {
-          animarContadoresHome();
-        }, 300);
-        // Parar de observar após a primeira animação
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.2, // Animar quando 20% da seção estiver visível
-    rootMargin: '0px 0px -100px 0px' // Margem para começar a animação um pouco antes
-  });
-  
-  observer.observe(estatisticasSection);
-}
 
-// Função para verificar se os contadores já estão visíveis ao carregar a página
-function verificarContadoresVisiveis() {
-  const currentPage = getCurrentPage();
-  if (currentPage !== 'home') return;
-  
-  // Aguardar um pouco para garantir que a página carregou completamente
-  setTimeout(() => {
-    const estatisticasSection = document.querySelector('.estatisticas-home');
-    if (!estatisticasSection) {
-      console.log('Seção de estatísticas não encontrada ao verificar visibilidade');
-      return;
-    }
-    
-    // Verificar se a seção já está visível na tela
-    const rect = estatisticasSection.getBoundingClientRect();
-    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-    
-    console.log('Seção visível ao carregar:', isVisible);
-    
-    if (isVisible) {
-      // Se já estiver visível, animar imediatamente
-      setTimeout(() => {
-        animarContadoresHome();
-      }, 500);
-    } else {
-      // Se não estiver visível, usar o observer
-      initContadoresHome();
-    }
-  }, 1000); // Aguardar 1 segundo após o carregamento da página
-}
 
-// Função para alternar o modo escuro
-function toggleDarkMode() {
-  document.body.classList.toggle('dark-mode');
-  document.querySelector('.top-bar')?.classList.toggle('dark-mode');
-}
+
+
+
 
 // Inicialização quando a página carrega
 document.addEventListener('DOMContentLoaded', function() {
@@ -686,7 +618,7 @@ if (!document.querySelector('.galeria-modal')) {
   console.log('Talheres decorativos adicionados à página');
   // Configurar a interação com o bottom panel
   setupUtensilsInteraction();
-}
+
 
 // Função para configurar a interação dos talheres com o bottom panel
 function setupUtensilsInteraction() {

@@ -741,15 +741,7 @@ body {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   object-fit: cover; /* Mantém a proporção e cobre o container */
 }
-@media (max-width: 768px) {
-  .segredo-video {
-    max-width: 100%;
-  }
-  
-  .segredo-video video {
-    max-height: 300px;
-  }
-}
+
 
 .segredos-lista {
   flex: 1;
@@ -1183,31 +1175,7 @@ margin-left: 200px;
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
-  .clube-form {
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  .clube-form input {
-    border-radius: 30px;
-    margin-bottom: 1rem;
-  }
-  
-  .btn-clube {
-    border-radius: 30px;
-    width: 100%;
-  }
-  
-  .app-buttons {
-    flex-direction: column;
-  }
-  
-  .btn-app {
-    width: 100%;
-    justify-content: center;
-  }
-}
+
 .modal {
   display: none;
   position: fixed;
