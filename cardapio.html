@@ -2,52 +2,673 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cardápio – Nostra Massa</title>
   <link rel="icon" href="project_root/assets/nostraicon.png" type="image/png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="project_root/css/style.css" />
   <link rel="stylesheet" href="project_root/css/cardapio.css" />
+  <link rel="stylesheet" href="project_root/css/responsivo.css" />
 </head>
 <body>
 
   <!-- HEADER -->
   <header class="top-bar">
-  <div class="logo-container">
-    <a href="index.html" class="logo">
-      <img src="project_root/assets/nostraicon.png" alt="Logo Nostra Massa" />
-    </a>
-  </div>
-  <nav class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="cardapio.html">Cardápio</a>
-    <a href="unidades.html">Unidades</a>
-    <a href="sobrenos.html">Sobre Nós</a>
-    <a href="contato.html">Contato</a>
+    <div class="logo-container">
+      <a href="index.html" class="logo">
+        <img src="project_root/assets/nostraicon.png" alt="Logo Nostra Massa" />
+      </a>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="cardapio.html">Cardápio</a>
+      <a href="unidades.html">Unidades</a>
+      <a href="sobrenos.html">Sobre Nós</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+  </header>
+
+  <!-- ÍNDICE -->
+  <nav class="container-fluid indice" aria-label="Índice do Cardápio">
+    <a href="#pizzas-salgadas" class="indice-tab">Pizzas Salgadas</a>
+    <a href="#pizzas-doces" class="indice-tab">Pizzas Doces</a>
+    <a href="#fondue" class="indice-tab">Fondue</a>
+    <a href="#caldos" class="indice-tab">Caldos</a>
+    <a href="#massas" class="indice-tab">Massas</a>
+    <a href="#saladas" class="indice-tab">Saladas</a>
+    <a href="#porcoes" class="indice-tab">Porções</a>
+    <a href="#bebidas" class="indice-tab">Bebidas</a>
+    <a href="#vinhos" class="indice-tab">Vinhos</a>
+
   </nav>
-</header>
 
-  <!-- BOTTOM PANEL -->
-  <div class="bottom-panel" id="bottomPanel">
-    <div class="bottom-panel-header" id="expandButton" role="button" aria-expanded="false">
-      ▲ Role para visualizar nosso cardápio
-    </div>
-    <div class="bottom-panel-content" id="panelContent">
-      <div class="menu-columns">
-        <div class="menu-column salgadas">
-          <h2 class="headline-central">Pizzas Salgadas</h2>
-        </div>
-        <div class="menu-column doces">
-          <h2 class="headline-central">Pizzas Doces</h2>
-        </div>
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container" role="main">
+    <!-- PIZZAS SALGADAS -->
+    <section id="pizzas-salgadas" aria-label="Pizzas Salgadas">
+      <h2 class="section-title">Pizzas Salgadas</h2>
+      <div class="cardapio-grid">
+        <!-- Aqui o conteúdo completo das pizzas salgadas -->
+        <article class="cardapio-item">
+          <h3>ABOBRINHA <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, abobrinha em rodelas temperadas, parmesão, mais molho de tomate, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>ALCATRA (CHARMOSA) <span class="price">R$ 87,90</span></h3>
+          <p>Molho de tomates frescos, muçarela, Alcatra, gorgonzola, cebola roxa marinada no balsâmico e mel, orégano e azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>ALHO PORÓ <span class="price">R$ 84,90</span></h3>
+          <p>Molho tomates frescos, muçarela, cream cheese, alho poró puxado na manteiga e vinho branco, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>ALICHE <span class="price">R$ 84,90</span></h3>
+          <p>Molho tomates frescos, muçarela, aliche, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>AMERICANA <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, calabresa, bacon, cebola, molho barbecue, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>AMOROSA <span class="price">R$ 79,90</span></h3>
+          <p>Molho de tomates frescos, muçarela, peito de peru, cream cheese, geleia de amora, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>ATUM <span class="price">R$ 87,90</span></h3>
+          <p>Molho tomate, muçarela, atum em pedaços, rodelas de tomate, cebola, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>ATUM DO CHEF <span class="price">R$ 89,90</span></h3>
+          <p>Molho tomates frescos, muçarela, atum em pedaços, brócolis, rodelas de tomate, cebola, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>ATUM HOLL <span class="price">R$ 87,90</span></h3>
+          <p>Molho tomates frescos, muçarela, atum em pedaços, cream cheese, molho tare, cheiro verde, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>À MODA DA CASA <span class="price">R$ 84,90</span></h3>
+          <p>Molho tomates frescos, muçarela, calabresa, lombinho defumado, milho, bacon, rodelas de tomate, requeijão cremoso, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>BACALHAU <span class="price">R$ 89,90</span></h3>
+          <p>Molho tomates frescos, muçarela, bacalhau em lascas, ovo, tomates frescos, cebola, pimentão, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>BAJANA ESPECIAL <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, calabresa, pimenta, tomate seco, creme de espinafre, rodelas de tomate, manjericão, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>BOLONHESA <span class="price">R$ 82,90</span></h3>
+          <p>Molho tomates frescos, muçarela, calabresa, bacon, palmito, requeijão, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>BRÓCOLIS COM REQU <span class="price">R$ 78,90</span></h3>
+          <p>Molho tomates frescos, muçarela, brócolis, requeijão cremoso, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>BRÓCOLIS DO CHEF <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, brócolis, palmito, tomate seco, creme de espinafre, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>CALABRESA <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, calabresa, cebola, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>CALABRIA <span class="price">R$ 82,90</span></h3>
+          <p>Molho tomates frescos, muçarela, calabresa, tomates selecionados, requeijão, cebola selecionada fatiada, pimenta, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>CALIFÓRINA <span class="price">R$ 86,90</span></h3>
+          <p>Molho tomates frescos, muçarela, lombinho, pêssego, abacaxi, figo, ameixa e cereja</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>CAMARÃO <span class="price">R$ 108,90</span></h3>
+          <p>Molho tomates frescos, muçarela, camarão ao molho de tomate fresco, requeijão, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>CAPRESE <span class="price">R$ 82,90</span></h3>
+          <p>Molho tomates frescos, muçarela, rodelas de tomates selecionados, pesto de azeitonas pretas, muçarela de búfala, manjericão fresco, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>CARIJÓ <span class="price">R$ 81,90</span></h3>
+          <p>Molho tomates frescos, muçarela, frango, milho, requeijão, ovo, bacon, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>CINCO QUEIJOS <span class="price">R$ 83,90</span></h3>
+          <p>Molho tomates frescos, muçarela, parmesão, gorgonzola, requeijão, cheddar, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>DIVINA <span class="price">R$ 79,90</span></h3>
+          <p>Molho de tomates frescos, muçarela, pepperoni, pimentão amarelo e vermelho, champignon, cebolas, orégano e azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>DOG (CACHORRO QUENTE) <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, molho de tomate com salsichas, requeijão, milho, batata palha, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>DORITOS <span class="price">R$ 81,90</span></h3>
+          <p>Molho tomates frescos, muçarela, bacon, cheddar, doritos, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>ESCAROLA <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, escarola, bacon, tomate, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>ESPECIAL DO CLIENTE (06 INGREDIENTES) <span class="price">R$ 89,90</span></h3>
+          <p>Escolha até 6 ingredientes: Muçarela, calabresa, lombinho, peito de peru, pepperoni, bacon, parmesão, gorgonzola, requeijão, cheddar, cream cheese, palmito, tomate, cebola, milho, ervilha, ovo, brócolis, pimenta, tomate seco, champignon, frango</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>ESTROGONOFE DE CARNE <span class="price">R$ 87,90</span></h3>
+          <p>Molho tomates frescos, muçarela, estrogonofe de carne com champignon, requeijão cremoso, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>ESTROGONOFE DE FRANGO <span class="price">R$ 81,90</span></h3>
+          <p>Molho tomates frescos, muçarela, estrogonofe de frango com champignon, requeijão cremoso, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>FIGO COM 3 QUEIJOS <span class="price">R$ 76,90</span></h3>
+          <p>Molho tomates frescos, muçarela, gorgonzola, requeijão cremoso e figo caramelizado</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>FILÉ MIGNON <span class="price">R$ 118,90</span></h3>
+          <p>Molho tomates frescos, muçarela, Filé mignon em cubos, gotas de requeijão, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>FIORENTINI <span class="price">R$ 83,90</span></h3>
+          <p>Molho tomates frescos, muçarela, peito de peru defumado, milho, requeijão cremoso, parmesão, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>FRANGO COM REQUEIJÃO <span class="price">R$ 77,90</span></h3>
+          <p>Molho tomates frescos, muçarela, frango desfiado, requeijão cremoso, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>HOT HOLL (SALMÃO) <span class="price">R$ 108,90</span></h3>
+          <p>Molho tomates frescos, muçarela, salmão, cream cheese, cebolinha, molho tare, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>IMPERIAL <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, cream cheese, geleia de pimenta, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>INGLESA <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, lombinho defumado, ovo, cebola, requeijão, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>ITALIANA <span class="price">R$ 81,90</span></h3>
+          <p>Molho tomates frescos, muçarela, molho carne moída, palmito, requeijão, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>LIGHT ESPECIAL <span class="price">R$ 77,90</span></h3>
+          <p>Molho tomates frescos, queijo branco, peito de peru, brócolis, rodelas de tomate, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>LINGUIÇA ARTESANAL <span class="price">R$ 91,90</span></h3>
+          <p>Molho de tomates frescos, muçarela, linguiça artesanal, requeijão, pimentão, pimenta biquinho, queijo coalho, cheiro verde, orégano e azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>LOMBINHO COM REQU <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, lombinho canadense, requeijão cremoso, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>LOMBINHO DO CHEF <span class="price">R$ 81,90</span></h3>
+          <p>Molho tomates frescos, muçarela, lombinho canadense, tomate seco, bacon, requeijão cremoso, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>MARGUERITA <span class="price">R$ 69,90</span></h3>
+          <p>Molho tomates frescos, muçarela, manjericão fresco, e mais molho de tomates, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>MILHO <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, milho, requeijão, bacon, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>MUÇARELA <span class="price">R$ 63,90</span></h3>
+          <p>Molho tomates frescos, muçarela, rodelas de tomate, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>NAPOLITANA <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, parmesão, rodelas de tomate, manjericão fresco, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>NORDESTINA COM REQU <span class="price">R$ 94,90</span></h3>
+          <p>Molho tomates frescos, muçarela, carne seca desfiada, rodelas de tomates frescos, cebola, requeijão, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>PALMITO <span class="price">R$ 81,90</span></h3>
+          <p>Molho tomates frescos, muçarela, palmito, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>PALMITO DO CHEF <span class="price">R$ 83,90</span></h3>
+          <p>Molho tomates frescos, palmito, champignon, tomate seco, bacon, requeijão cremoso, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>PÃO DE ALHO <span class="price">R$ 79,90</span></h3>
+          <p>Muçarela, creme de alho temperado, requeijão, bacon, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>PAULISTA <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, presunto picado, ervilha, palmito, bacon, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>PEITO PERU <span class="price">R$ 85,90</span></h3>
+          <p>Molho tomates frescos, muçarela, peito de peru picado, alho poró temperado, cream cheese, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>PEPPERONI <span class="price">R$ 81,90</span></h3>
+          <p>Molho tomates frescos, muçarela, pepperoni, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>PIZZAIOLO <span class="price">R$ 81,90</span></h3>
+          <p>Molho tomates frescos, muçarela, pepperoni, palmito, tomate seco, bacon, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>PORTUGUESA <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, presunto, palmito, ervilha, ovo, cebola, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>PRECIOSA <span class="price">R$ 88,90</span></h3>
+          <p>Molho tomates frescos, muçarela, pepperoni, cream cheese, gorgonzola, tomate cereja, manjericão, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>PRESUNTO E MUCARELA <span class="price">R$ 78,90</span></h3>
+          <p>Molho tomates frescos, muçarela, presunto, tomates, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>PRESUNTO PARMA <span class="price">R$ 89,90</span></h3>
+          <p>Molho tomates frescos, muçarela, rúcula, tomate cereja, presunto parma, parmesão, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>PRIMAVERA <span class="price">R$ 78,90</span></h3>
+          <p>Molho tomates frescos, muçarela, palmito, brócolis, manjericão fresco, rodelas de tomate, requeijão cremoso, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>QUATRO QUEIJOS <span class="price">R$ 81,80</span></h3>
+          <p>Molho tomates frescos, muçarela, parmesão, gorgonzola, requeijão cremoso, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>ROMANA <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, lombinho canadense, champignon, rodelas tomates, manjericão, requeijão cremoso, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>RÚCULA DO CHEF <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, rúcula, molho a base de mostarda, acceto balsâmico, mel, tomate seco, creme de queijo branco, azeitonas</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>SHIMEJI <span class="price">R$ 86,90</span></h3>
+          <p>Molho tomates frescos, muçarela, shimeji na manteiga, cream cheese, cebolinha</p>
+        </article>
+        <article class="cardapio-item">
+          <h3>SUPREMA <span class="price">R$ 79,90</span></h3>
+          <p>Molho tomates frescos, muçarela, carne bovina em cubos, pepperoni, champignon, pimentão, azeitonas</p>
+        </article>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="loading-spinner" id="loadingSpinner"></div>
+    <!-- PIZZAS DOCES -->
+    <section id="pizzas-doces" aria-label="Pizzas Doces" style="margin-top: 4rem;">
+      <h2 class="section-title">Pizzas Doces</h2>
+      <div class="cardapio-grid">
+      <article class="cardapio-item">
+        <h3>ABACAXI C/ CHOC BRANCO <span class="price">R$ 74,90</span></h3>
+        <p>Massa fina, abacaxi, chocolate branco, leite condensado e coco</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>BANANA C/ CHOC BRANCO <span class="price">R$ 74,90</span></h3>
+        <p>Massa fina, banana, chocolate branco e canela</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>BOMBOM DE KITKAT <span class="price">R$ 74,90</span></h3>
+        <p>Massa fina, brigadeiro artesanal, creme de leite ninho, Kit Kat, morango</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>BOMBOM DE UVA <span class="price">R$ 74,90</span></h3>
+        <p>Massa fina, brigadeiro artesanal, creme de leite ninho, uva</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>BRIGADEIRO <span class="price">R$ 74,90</span></h3>
+        <p>Massa fina, Brigadeiro artesanal e chocolate granulado</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>CASADINHO <span class="price">R$ 74,90</span></h3>
+        <p>Massa fina, chocolate ao leite com chocolate branco</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>CHOCOLATE BRANCO <span class="price">R$ 74,90</span></h3>
+        <p>Massa fina, chocolate branco</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>NUTELLA C/ MORANGO <span class="price">R$ 77,90</span></h3>
+        <p>Massa fina, Nutella, creme de leite e morango</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>PAÇOQUINHA NOVIDADE <span class="price">R$ 70,90</span></h3>
+        <p>Massa fina, chocolate ao leite, paçoquinha</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>PISTACHE <span class="price">R$ 85,90</span></h3>
+        <p>Massa fina, Ganache de pistache e amêndoas de pistache</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>PRESTÍGIO <span class="price">R$ 74,90</span></h3>
+        <p>Massa fina, Brigadeiro artesanal com doce de coco</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>ROMEU E JULIETA <span class="price">R$ 73,90</span></h3>
+        <p>Massa fina, muçarela, goiabada cremosa</p>
+      </article>
+      </div>
+    </section>
 
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <script src="project_root/js/script.js"></script>
+    <!-- FONDUE -->
+    <section id="fondue" aria-label="Fondue" style="margin-top: 4rem;">
+      <h2 class="section-title">Fondue</h2>
+      <div class="cardapio-grid">
+      <article class="cardapio-item">
+        <h3>FONDUE - CHOCOLATE <span class="price">R$ 39,90</span></h3>
+        <p>5 acompanhamentos disponíveis no dia</p>
+      </article>
+      </div>
+    </section>
+  
+
+    <!-- CALDOS -->
+    <section id="caldos" aria-label="Caldos" style="margin-top: 4rem;">
+      <h2 class="section-title">Caldos</h2>
+      <div class="cardapio-grid">
+      <article class="cardapio-item">
+        <h3>Cabotia c/ carne seca <span class="price">R$ 26,90</span></h3>
+        <p>Caldo de cabotia com carne seca desfiada</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Feijão <span class="price">R$ 26,90</span></h3>
+        <p>Caldo de feijão, calabresa e bacon</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Legumes <span class="price">R$ 26,90</span></h3>
+        <p>Cabotia, cenoura, mandioquinha, chuchu, mandioca e abobrinha</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Mandioca com bacon <span class="price">R$ 26,90</span></h3>
+        <p>Caldo de mandioca com bacon</p>
+      </article>
+      </div>
+    </section>
+
+    <!-- MASSAS -->
+      <section id="massas" aria-label="Massas" style="margin-top: 4rem;">
+        <h2 class="section-title">Massas</h2>
+        <div class="cardapio-grid">
+      <article class="cardapio-item">
+        <h3>LASANHA 4 QUEIJOS <span class="price">R$ 29,90</span></h3>
+        <p>Molho branco</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>LASANHA PRESUNTO E MUÇARELA <span class="price">R$ 29,90</span></h3>
+        <p>Molho bolonhesa ou ao sugo. Escolher em adicionais</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>MAC & CHEESE (Macarrão) <span class="price">R$ 34,90</span></h3>
+        <p>Massa caracolina com creme de cheddar finalizado com bacon e farofa panko temperada</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>NHOQUE C/ MUÇARELA <span class="price">R$ 29,90</span></h3>
+        <p>Recheado com muçarela. Escolher 1 molho em adicionais</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>RONDELI PRESUNTO E MUÇARELA <span class="price">R$ 29,90</span></h3>
+        <p>Presunto e muçarela. Escolher 1 molho em adicionais</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>TALHARIM AO MOLHO BOLONHESA <span class="price">R$ 29,90</span></h3>
+        <p>Talharim ao molho bolonhesa, queijo parmesão</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>TALHARIM AO MOLHO BRANCO <span class="price">R$ 29,90</span></h3>
+        <p>Talharim ao molho branco, queijo parmesão</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>TALHARIM AO MOLHO CAMARÃO <span class="price">R$ 39,90</span></h3>
+        <p>Talharim ao molho branco, com camarões, queijo parmesão</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>TALHARIM AO MOLHO SUGO <span class="price">R$ 29,90</span></h3>
+        <p>Talharim ao molho sugo, queijo parmesão</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>TALHARIM COM BRÓCOLIS E BACON <span class="price">R$ 29,90</span></h3>
+        <p>Talharim ao molho branco, brócolis e bacon, queijo parmesão</p>
+      </article>
+      </div>
+    </section>
+
+    <!-- SALADAS -->
+    <section id="saladas" aria-label="Saladas" style="margin-top: 4rem;">
+      <h2 class="section-title">Saladas</h2>
+      <div class="cardapio-grid">
+      <article class="cardapio-item">
+        <h3>SALADACOMPLETA <span class="price">R$ 29,90</span></h3>
+        <p>Rúcula, alface, tomate, cebola, ervilha, muçarela, ovo, palmito, azeitonas</p>
+      </article>
+      </div>
+    </section>
+
+    <!-- PORÇÕES -->
+    <section id="porcoes" aria-label="Porções" style="margin-top: 4rem;">
+      <h2 class="section-title">Porções</h2>
+      <div class="cardapio-grid">
+      <article class="cardapio-item">
+        <h3>BATATA FRITA COMPLETA <span class="price">R$ 34,90</span></h3>
+        <p>Muçarela, bacon, cheddar, requeijão</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>CALABRESA ACEBOLADA <span class="price">R$ 34,90</span></h3>
+        <p></p>
+      </article>
+      <article class="cardapio-item">
+        <h3>ESTROGONOFE DE CARNE <span class="price">R$ 54,90</span></h3>
+        <p>Acompanhamento: arroz, batata palha e salada (porção para 2 pessoas)</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>ESTROGONOFE DE FRANGO <span class="price">R$ 47,90</span></h3>
+        <p>Acompanhamento: arroz, batata palha e salada (porção para 2 pessoas)</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>FRANGO NO VARAL <span class="price">R$ 34,90</span></h3>
+        <p>Porção de frango no varal acompanhado de fritas</p>
+      </article>
+      </div>
+    </section>
+
+    <!-- BEBIDAS -->
+    <section id="bebidas" aria-label="Bebidas" style="margin-top: 4rem;">
+      <h2 class="section-title">Bebidas</h2>
+      <div class="cardapio-grid">
+      <article class="cardapio-item">
+        <h3>Água com gás <span class="price">R$ 4,00</span></h3>
+        <p>500ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Água sem gás <span class="price">R$ 3,50</span></h3>
+        <p>500ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Coca-Cola <span class="price">R$ 13,50</span></h3>
+        <p>2 litros</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Coca-Cola <span class="price">R$ 8,90</span></h3>
+        <p>600ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Coca-Cola <span class="price">R$ 6,50</span></h3>
+        <p>Lata</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Coca-Cola Zero <span class="price">R$ 8,90</span></h3>
+        <p>600ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Coca-Cola Zero <span class="price">R$ 6,50</span></h3>
+        <p>Lata</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Fanta Laranja <span class="price">R$ 13,50</span></h3>
+        <p>2 litros</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Fanta Laranja <span class="price">R$ 6,50</span></h3>
+        <p>Lata</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Fanta Uva <span class="price">R$ 6,50</span></h3>
+        <p>Lata</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Guaraná Antarctica <span class="price">R$ 13,50</span></h3>
+        <p>2 litros</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Guaraná Antarctica <span class="price">R$ 8,90</span></h3>
+        <p>600ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Guaraná Zero <span class="price">R$ 13,50</span></h3>
+        <p>2 litros</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>H2O Limoneto <span class="price">R$ 7,90</span></h3>
+        <p>500ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Sprite <span class="price">R$ 13,50</span></h3>
+        <p>2 litros</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Sprite <span class="price">R$ 6,50</span></h3>
+        <p>Lata</p>
+      </article>
+
+      <article class="cardapio-item">
+        <h3>Del Valle Goiaba <span class="price">R$ 6,90</span></h3>
+        <p>Lata</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Del Valle Manga <span class="price">R$ 6,90</span></h3>
+        <p>Lata</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Del Valle Pêssego <span class="price">R$ 6,90</span></h3>
+        <p>Lata</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Del Valle Uva <span class="price">R$ 6,90</span></h3>
+        <p>Lata</p>
+      </article>
+
+      <article class="cardapio-item">
+        <h3>Suco Natural Abacaxi <span class="price">R$ 11,90</span></h3>
+        <p>350ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Suco Natural Abacaxi c/ Ameixa <span class="price">R$ 11,90</span></h3>
+        <p>350ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Suco Natural Abacaxi c/ Hortelã <span class="price">R$ 11,90</span></h3>
+        <p>350ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Suco Natural Laranja <span class="price">R$ 11,90</span></h3>
+        <p>350ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Suco Natural Laranja c/ Morango <span class="price">R$ 15,90</span></h3>
+        <p>350ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Suco Natural Limão <span class="price">R$ 11,90</span></h3>
+        <p>350ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Suco Natural Maracujá <span class="price">R$ 11,90</span></h3>
+        <p>350ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Suco Natural Morango <span class="price">R$ 11,90</span></h3>
+        <p>350ml</p>
+      </article>
+
+      <article class="cardapio-item">
+        <h3>Amstel (Puro Malte) <span class="price">R$ 6,90</span></h3>
+        <p>Lata 350ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Antarctica <span class="price">R$ 6,90</span></h3>
+        <p>Lata 350ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Brahma <span class="price">R$ 6,90</span></h3>
+        <p>Lata 350ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Corona Extra <span class="price">R$ 12,90</span></h3>
+        <p>Long Neck 330ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Heineken (Puro Malte) <span class="price">R$ 11,90</span></h3>
+        <p>Long Neck 330ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Heineken Zero <span class="price">R$ 11,90</span></h3>
+        <p>Long Neck 330ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Skol <span class="price">R$ 6,90</span></h3>
+        <p>Lata 350ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Spaten <span class="price">R$ 10,90</span></h3>
+        <p>Long Neck 330ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Stella Artois <span class="price">R$ 11,90</span></h3>
+        <p>Long Neck 330ml</p>
+      </article>
+    </section>
+
+      <!-- VINHOS -->
+    <section id="vinhos" aria-label="Vinhos" style="margin-top: 4rem;">
+        <h2 class="section-title">Vinhos</h2>
+        <div class="cardapio-grid">
+      <article class="cardapio-item">
+        <h3>Vinho Girola Branco Seco <span class="price">R$ 32,50</span></h3>
+        <p>Garrafa 750ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Vinho Girola Branco Suave <span class="price">R$ 32,50</span></h3>
+        <p>Garrafa 750ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Vinho Girola Rosé Suave <span class="price">R$ 32,50</span></h3>
+        <p>Garrafa 750ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Vinho Girola Tinto Seco <span class="price">R$ 32,50</span></h3>
+        <p>Garrafa 750ml</p>
+      </article>
+      <article class="cardapio-item">
+        <h3>Vinho Girola Tinto Suave <span class="price">R$ 32,50</span></h3>
+        <p>Garrafa 750ml</p>
+      </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="container" style="text-align:center; color:#777; margin-top: 3rem;">
+    <small>© 2025 Nostra Massa • Todos os direitos reservados</small>
+  </footer>
+
 </body>
 </html>
