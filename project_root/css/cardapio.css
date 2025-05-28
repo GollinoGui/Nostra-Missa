@@ -69,7 +69,7 @@ main.container {
   box-shadow: 0 0 30px rgba(0,0,0,0.7);
   min-height: 600px;
   color: #4e2424;
-  background: rgba(255, 255, 255, 0.9);
+  background-color: rgba(250, 244, 229, 0.9);
   transition: margin-right 0.3s ease;
   font-family: 'Georgia', serif;
 }
@@ -105,7 +105,7 @@ section[id] {
 }
 
 .cardapio-item {
-  background: rgba(255, 250, 242, 0.95);
+  background-color: #fffaf2; /* mais claro pra destacar sobre container */
   padding: 1.4rem 1.6rem;
   border-radius: 16px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
@@ -168,7 +168,7 @@ section[id] {
 
 .indice a:hover,
 .indice a:focus {
-  background-color: #f1faee;
+  background-color: rgba(250, 244, 229, 0.9);
   color: #d00000;
   box-shadow: 0 0 20px #d0000055;
 }

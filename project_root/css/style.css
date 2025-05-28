@@ -175,8 +175,7 @@ body::before {
 }
 
 .nav-links a:focus {
-  outline: 2px solid #ffba00;
-  outline-offset: 2px;
+  outline: none;
 }
 
 
@@ -190,13 +189,6 @@ body::before {
 @keyframes backgroundMove {
     0% { background-position: 75% 75%; }
     100% { background-position: 100% 100%; }
-}
-
-.nav-links a:hover {
-    color: #ffffff;
-    background-color: var(--hover-color);
-    border: 1px solid #011b01;
-    transform: scale(1.1);
 }
 
 main {
@@ -478,3 +470,16 @@ html, body {
     max-width: 100vw;
   }
   
+
+  /* Remove fundo preto ou contornos dos links de navegação */
+.nav-links a,
+.nav-links a:focus,
+.nav-links a:active,
+.nav-links a:visited,
+.nav-links a:target,
+.nav-links a:focus-visible,
+.nav-links a[aria-current="page"] {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
