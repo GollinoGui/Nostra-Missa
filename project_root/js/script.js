@@ -4,12 +4,9 @@ function getCurrentPage() {
   if (path.includes('cardapio.html')) return 'cardapio';
   if (path.includes('unidades.html')) return 'unidades';
   if (path.includes('contato.html')) return 'contato';
-  return 'home'; // index.html ou raiz
+  if (path.includes('index.html') || path === '/' || path === '') return 'home';
+  return 'home';
 }
-
-
-
-
 
 
 
@@ -39,6 +36,7 @@ function animarContadores() {
       requestAnimationFrame(atualizarContador);
     }
   });
+  
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -47,16 +45,9 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
       animarContadores();
     }, 1000);
+    initReservas();
   }
 });
-
-
-
-
-
-
-
-
 
 // Inicialização quando a página carrega
 document.addEventListener('DOMContentLoaded', function() {
@@ -91,124 +82,12 @@ window.addEventListener('load', function() {
     }, 2000);
   }
 });
-function testarContadores() {
-  console.log('=== TESTE DE CONTADORES ===');
-  console.log('Página atual:', getCurrentPage());
-  
-  const contadoresGeral = document.querySelectorAll('.contador');
-  console.log('Contadores encontrados:', contadoresGeral.length);
-  
-  contadoresGeral.forEach((contador, index) => {
-    console.log(`Contador ${index + 1}:`, {
-      elemento: contador,
-      dataTarget: contador.getAttribute('data-target'),
-      textoAtual: contador.textContent
-    });
-  });
-  
-  // Forçar animação
-  contadoresGeral.forEach((contador) => {
-    const valorFinal = parseInt(contador.getAttribute('data-target'));
-    if (!isNaN(valorFinal)) {
-      contador.textContent = '0';
-      
-      const duracao = 2000;
-      const inicioAnimacao = Date.now();
-      
-      function atualizarContador() {
-        const tempoDecorrido = Date.now() - inicioAnimacao;
-        const progresso = Math.min(tempoDecorrido / duracao, 1);
-        const valorAtual = Math.floor(progresso * valorFinal);
-        
-        contador.textContent = valorAtual;
-        
-        if (progresso < 1) {
-          requestAnimationFrame(atualizarContador);
-        } else {
-          contador.textContent = valorFinal;
-        }
-      }
-      
-      requestAnimationFrame(atualizarContador);
-    }
-  });
-}
-
-window.testarContadores = testarContadores;
-// Função para reinicializar contadores (caso necessário)
-function reiniciarContadores() {
-  if (getCurrentPage() === 'home') {
-    animarContadoresHome();
-  }
-}
-
-// Expor função globalmente para debug
-window.reiniciarContadores = reiniciarContadores;
-window.animarContadoresHome = animarContadoresHome;
-
-// Função para testar contadores manualmente
-// Também inicializar quando a janela carrega completamente
-window.addEventListener('load', function() {
-  console.log('Janela carregada completamente, página:', getCurrentPage());
-  
-  // Backup: tentar inicializar contadores novamente se for a home
-  if (getCurrentPage() === 'home') {
-    setTimeout(() => {
-      const estatisticasSection = document.querySelector('.estatisticas-home');
-      if (estatisticasSection) {
-        const contadores = estatisticasSection.querySelectorAll('.contador');
-        // Se os contadores ainda estão em 0, animar
-        const precisaAnimar = Array.from(contadores).some(contador => 
-          contador.textContent === '0' || contador.textContent === ''
-        );
-        
-        if (precisaAnimar) {
-          console.log('Executando animação de backup dos contadores');
-          animarContadoresHome();
-        }
-      }
-    }, 2000);
-  }
-});
 
 
 
 
 
-// Solução simplificada com CSS
-function initAccordion() {
-  document.querySelectorAll('.accordion-header').forEach(header => {
-    header.addEventListener('click', function() {
-      this.classList.toggle('active');
-    });
-  });
-}
 
-// Versão nativa (fallback)
-function initAccordionNative() {
-  document.querySelectorAll('.accordion-header').forEach(header => {
-    const body = header.nextElementSibling;
-    
-    // Inicializa fechado
-    if (body && !header.classList.contains('active')) {
-      body.style.display = 'none';
-    }
-    
-    header.addEventListener('click', function() {
-      this.classList.toggle('active');
-      
-      if (body) {
-        if (this.classList.contains('active')) {
-          body.style.display = 'block';
-        } else {
-          body.style.display = 'none';
-        }
-      }
-    });
-  });
-}
-
-// Inicialização do Swiper
 
 
 // Função para carregar o conteúdo apropriado para cada página
@@ -291,14 +170,9 @@ function carregarConteudoEspecifico() {
       break;
   }
   
-  // Após carregar o conteúdo, inicialize os componentes
-  initAccordion();
+ 
   
   
-  // Adicionar classe 'visible' aos elementos fade-in
-  document.querySelectorAll('.fade-in').forEach(el => {
-    el.classList.add('visible');
-  });
   
   // Corrigir visibilidade e estilos
   corrigirVisibilidadeConteudo();
@@ -589,98 +463,7 @@ if (!document.querySelector('.galeria-modal')) {
 }); 
 
 
-// Observar mudanças no DOM que possam afetar a visibilidade do painel
-  observer.observe(document.body, { 
-    childList: true, 
-    subtree: true,
-    attributes: true,
-    attributeFilter: ['class', 'style']
-  });
-  
-  console.log('Talheres decorativos adicionados à página');
-  // Configurar a interação com o bottom panel
-  setupUtensilsInteraction();
 
-
-// Função para configurar a interação dos talheres com o bottom panel
-function setupUtensilsInteraction() {
-  const bottomPanel = document.getElementById('bottomPanel');
-  if (!bottomPanel) return;
-  
-  const leftUtensil = document.querySelector('.left-utensil');
-  const rightUtensil = document.querySelector('.right-utensil');
-  
-  // Atualizar a classe dos talheres quando o painel mudar
-  const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.attributeName === 'class') {
-        const isPanelOpen = bottomPanel.classList.contains('open');
-        leftUtensil.classList.toggle('panel-open', isPanelOpen);
-        rightUtensil.classList.toggle('panel-open', isPanelOpen);
-      }
-    });
-  });
-  
-  observer.observe(bottomPanel, { attributes: true });
-  
-  // Também atualizar quando togglePanel for chamado diretamente
-  const originalTogglePanel = window.togglePanel;
-  if (originalTogglePanel) {
-    window.togglePanel = function() {
-      originalTogglePanel.apply(this, arguments);
-      const isPanelOpen = bottomPanel.classList.contains('open');
-      leftUtensil.classList.toggle('panel-open', isPanelOpen);
-      rightUtensil.classList.toggle('panel-open', isPanelOpen);
-    };
-  }
-  
-}
-// Adicione esta função para inicializar a galeria de fotos
-function initGaleria() {
-  const galeriaItems = document.querySelectorAll('.galeria-item');
-  const modal = document.querySelector('.galeria-modal');
-  
-  // Se não existir modal, crie um
-  if (!modal && galeriaItems.length > 0) {
-    const newModal = document.createElement('div');
-    newModal.className = 'galeria-modal';
-    newModal.innerHTML = `
-      <span class="galeria-fechar">&times;</span>
-      <img class="galeria-modal-content">
-      <div class="galeria-caption"></div>
-    `;
-    document.body.appendChild(newModal);
-    
-    const fecharBtn = modal.querySelector('.galeria-fechar');
-  fecharBtn.onclick = function() {
-    modal.style.display = 'none';
-  };
-  }
-  
-  // Adicionar eventos de clique aos itens da galeria
-  galeriaItems.forEach(item => {
-    // Remover eventos antigos para evitar duplicação
-    item.removeEventListener('click', handleGaleriaClick);
-    
-    // Adicionar novo evento de clique
-    item.addEventListener('click', handleGaleriaClick);
-  });
-  
-  // Função para lidar com o clique na galeria
-  function handleGaleriaClick() {
-    const img = this.querySelector('img');
-    const modalImg = modal.querySelector('.galeria-modal-content');
-    const captionText = modal.querySelector('.galeria-caption');
-    
-    modal.style.display = 'block';
-    modalImg.src = img.src;
-    captionText.innerHTML = this.getAttribute('data-description');
-    
-    console.log('Imagem clicada:', img.src);
-  }
-  
-  console.log('Galeria inicializada com', galeriaItems.length, 'itens');
-}
 
 
 // Adicione esta função para animar a timeline
@@ -697,44 +480,7 @@ function animateTimeline() {
 
 
 
-// Chamar a função após carregar o conteúdo
-document.addEventListener('DOMContentLoaded', () => {
-  // Código existente...
-  
-  // Adicionar manchas de molho
-  setTimeout(adicionarManchasMolho, 500);
-});
 
-
-// Chamar a função após carregar o conteúdo e sempre que o conteúdo for atualizado
-document.addEventListener('DOMContentLoaded', () => {
-  // Código existente...
-  
-  // Aplicar cursores de pizza
-  setTimeout(aplicarCursoresPizza, 500);
-  
-  // Observar mudanças no DOM para aplicar cursores a elementos dinâmicos
-  const observer = new MutationObserver(() => {
-    aplicarCursoresPizza();
-  });
-  
-  const bottomPanel = document.getElementById('bottomPanel');
-  if (bottomPanel) {
-    observer.observe(bottomPanel, { childList: true, subtree: true });
-  }
-});
-const swiper = new Swiper('.depoimento-swiper', {
-  loop: true,
-  pagination: {
-    el: '.swiper-pagination',
-  },
-  autoplay: {
-    delay: 4000,
-    disableOnInteraction: false,
-  },
-});
-// Função para o calendário modal
-// Adicione este código ao seu arquivo script.js
 document.addEventListener('DOMContentLoaded', function() {
   const btnCalendario = document.getElementById('btn-calendario-completo');
   const calendarioModal = document.getElementById('calendario-modal');
@@ -1042,195 +788,333 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-// Aguarda o EmailJS carregar antes de inicializar
-function inicializarEmailJS() {
-    if (typeof emailjs !== 'undefined') {
-        console.log('EmailJS carregado com sucesso!');
-        // Substitua pela sua chave pública do EmailJS
-        emailjs.init("9UpfNm6FwZcwsTu9c");
-        return true;
-    } else {
-        console.log('EmailJS ainda não carregado...');
-        return false;
-    }
-}
 
-// Função para enviar email de boas-vindas
-function enviarEmailBoasVindas(email) {
-    if (typeof emailjs === 'undefined') {
-        console.error('EmailJS não está carregado!');
-        return Promise.reject('EmailJS não disponível');
-    }
+// Inicializar EmailJS
+(function(){
+   emailjs.init("QA4Kynn7C1ejXygzH");
+   console.log('EmailJS inicializado!');
+})();
 
-    const templateParams = {
-        to_email: email,
-        to_name: email.split('@')[0],
-        from_name: "Nostra Massa Pizzaria",
-        subject: "Bem-vindo ao Clube Nostra Massa! 🍕",
-        message: `Bem-vindo(a) ao Clube Nostra Massa! 🍕
+// Sistema de Reservas
+console.log('Carregando sistema de reservas...');
 
-Obrigado por se juntar à nossa família italiana! Agora você faz parte de um clube exclusivo de amantes da verdadeira pizza italiana.
-
-Como membro do Clube Nostra Massa, você terá acesso a:
-
-🎯 Degustações exclusivas de novos sabores
-💰 15% de desconto em todas as compras  
-🎉 Convites para eventos gastronômicos especiais
-👨‍🍳 Receitas exclusivas do nosso chef italiano
-
-Fique de olho em seu email para receber nossas ofertas especiais e novidades!
-
-Buon appetito!
-Equipe Nostra Massa`
-    };
-
-    // Substitua pelos seus IDs do EmailJS
-    return emailjs.send('service_5gck5a5', 'template_90imnpo', templateParams);
-}
-
-// Função para salvar email localmente
-function salvarEmailLocalmente(email) {
-    let emails = JSON.parse(localStorage.getItem('clubeEmails') || '[]');
-    
-    const novoEmail = {
-        email: email,
-        dataRegistro: new Date().toISOString(),
-        timestamp: Date.now()
-    };
-    
-    const emailExiste = emails.some(item => item.email === email);
-    
-    if (!emailExiste) {
-        emails.push(novoEmail);
-        localStorage.setItem('clubeEmails', JSON.stringify(emails));
-        console.log('Email salvo localmente:', email);
-        return true;
-    }
-    return false;
-}
-
-// Função para mostrar mensagem
-function mostrarMensagem(tipo, mensagem) {
-    const elementoSucesso = document.getElementById('mensagem-sucesso');
-    const elementoErro = document.getElementById('mensagem-erro');
-    
-    if (elementoSucesso) elementoSucesso.style.display = 'none';
-    if (elementoErro) elementoErro.style.display = 'none';
-    
-    if (tipo === 'sucesso' && elementoSucesso) {
-        elementoSucesso.textContent = mensagem;
-        elementoSucesso.style.display = 'block';
-        setTimeout(() => elementoSucesso.style.display = 'none', 5000);
-    } else if (tipo === 'erro' && elementoErro) {
-        elementoErro.textContent = mensagem;
-        elementoErro.style.display = 'block';
-        setTimeout(() => elementoErro.style.display = 'none', 5000);
-    }
-}
-
-// Event listener principal
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM carregado...');
-    
-    // Aguarda o EmailJS carregar
-    let tentativas = 0;
-    const maxTentativas = 10;
-    
-    function aguardarEmailJS() {
-        if (inicializarEmailJS()) {
-            console.log('EmailJS inicializado!');
-            configurarFormulario();
-        } else if (tentativas < maxTentativas) {
-            tentativas++;
-            setTimeout(aguardarEmailJS, 500);
-        } else {
-            console.warn('EmailJS não carregou. Funcionará apenas salvamento local.');
-            configurarFormulario();
-        }
-    }
-    
-    aguardarEmailJS();
+  console.log('DOM carregado');
+  setTimeout(() => {
+    inicializarReservas();
+    inicializarClube(); // Adicionar esta linha
+  }, 1000);
 });
 
-function configurarFormulario() {
-    const clubeForm = document.getElementById('clube-form');
-    const emailInput = document.getElementById('email-input');
-    
-    console.log('Configurando formulário...', clubeForm, emailInput);
-    
-    if (clubeForm && emailInput) {
-        console.log('Formulário encontrado! Adicionando event listener...');
+function inicializarReservas() {
+  console.log('Inicializando reservas...');
+  
+  // 1. Configurar botões "Reservar"
+  const botoesReserva = document.querySelectorAll('.btn-evento');
+  console.log('Botões encontrados:', botoesReserva.length);
+  
+  botoesReserva.forEach((btn, index) => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log('Botão reservar clicado:', index);
+      
+      // DEBUG: Verificar estrutura do evento
+      const eventoCard = this.closest('.evento-card');
+      console.log('Evento card encontrado:', eventoCard);
+      
+      if (eventoCard) {
+        const h3 = eventoCard.querySelector('h3');
+        const dia = eventoCard.querySelector('.evento-dia');
+        const mes = eventoCard.querySelector('.evento-mes');
+        const p = eventoCard.querySelector('p');
         
-        clubeForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            console.log('Formulário submetido!');
-            
-            const email = emailInput.value.trim();
-            console.log('Email:', email);
-            
-            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                mostrarMensagem('erro', 'Por favor, insira um email válido.');
-                return;
-            }
-
-            const submitBtn = clubeForm.querySelector('.btn-clube');
-            const textoOriginal = submitBtn.textContent;
-            submitBtn.textContent = 'Enviando...';
-            submitBtn.disabled = true;
-
-            // Salva localmente
-            const emailSalvo = salvarEmailLocalmente(email);
-            
-            if (!emailSalvo) {
-                mostrarMensagem('erro', 'Este email já está cadastrado!');
-                submitBtn.textContent = textoOriginal;
-                submitBtn.disabled = false;
-                return;
-            }
-
-            // Tenta enviar email se EmailJS estiver disponível
-            if (typeof emailjs !== 'undefined') {
-                enviarEmailBoasVindas(email)
-                    .then(function(response) {
-                        console.log('Email enviado!', response);
-                        mostrarMensagem('sucesso', '✅ Email cadastrado com sucesso! Verifique sua caixa de entrada.');
-                        emailInput.value = '';
-                    })
-                    .catch(function(error) {
-                        console.error('Erro ao enviar email:', error);
-                        mostrarMensagem('erro', '❌ Erro ao enviar email. Mas seu cadastro foi salvo!');
-                    })
-                    .finally(function() {
-                        submitBtn.textContent = textoOriginal;
-                        submitBtn.disabled = false;
-                    });
-            } else {
-                // Apenas salvamento local
-                mostrarMensagem('sucesso', '✅ Email cadastrado com sucesso!');
-                emailInput.value = '';
-                submitBtn.textContent = textoOriginal;
-                submitBtn.disabled = false;
-            }
-        });
-    } else {
-        console.error('Formulário não encontrado!');
+        console.log('Elementos encontrados:', {h3, dia, mes, p});
+        
+        const eventoNome = h3 ? h3.textContent : 'Evento não identificado';
+        const eventoData = (dia ? dia.textContent : '??') + ' de ' + (mes ? mes.textContent : '??');
+        const eventoDesc = p ? p.textContent : 'Descrição não disponível';
+        
+        console.log('Dados capturados:', {eventoNome, eventoData, eventoDesc});
+        
+        // Armazenar dados do evento no modal
+        const modal = document.getElementById('modal-reserva');
+        modal.setAttribute('data-evento-nome', eventoNome);
+        modal.setAttribute('data-evento-data', eventoData);
+        modal.setAttribute('data-evento-desc', eventoDesc);
+        
+        console.log('Dados salvos no modal');
+      } else {
+        console.error('Evento card não encontrado!');
+      }
+      
+      abrirModal();
+    });
+  });
+  
+  // 2. Configurar fechamento do modal
+  const closeBtn = document.querySelector('.close-reserva');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', fecharModal);
+  }
+  
+  // Fechar clicando fora do modal
+  window.addEventListener('click', function(e) {
+    if (e.target.id === 'modal-reserva') {
+      fecharModal();
     }
+  });
+  
+  // 3. Configurar formatação do telefone
+  const telefoneInput = document.getElementById('telefone-reserva');
+  if (telefoneInput) {
+    telefoneInput.addEventListener('input', formatarTelefone);
+  }
+  
+  // 4. Configurar envio do formulário
+  const form = document.getElementById('form-reserva');
+  if (form) {
+    form.addEventListener('submit', enviarReserva);
+  }
 }
 
-// Funções utilitárias
-function verEmailsCadastrados() {
-    const emails = JSON.parse(localStorage.getItem('clubeEmails') || '[]');
-    console.table(emails);
-    return emails;
+// Função para formatar telefone automaticamente
+function formatarTelefone(e) {
+  let valor = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
+  if (valor.length > 11) {
+    valor = valor.substring(0, 11);
+  }
+  if (valor.length <= 11) {
+    // Formatar como (XX) XXXXX-XXXX ou (XX) XXXX-XXXX
+    if (valor.length <= 2) {
+      valor = valor.replace(/(\d{0,2})/, '($1');
+    } else if (valor.length <= 7) {
+      valor = valor.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+    } else if (valor.length <= 10) {
+      valor = valor.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    } else {
+      valor = valor.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+    }
+  }
+  
+  e.target.value = valor;
 }
 
-function exportarEmails() {
-    const emails = JSON.parse(localStorage.getItem('clubeEmails') || '[]');
-    const dataStr = JSON.stringify(emails, null, 2);
-    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+function abrirModal() {
+  console.log('Abrindo modal...');
+  const modal = document.getElementById('modal-reserva');
+  
+  if (modal) {
+    // Pegar os dados salvos e mostrar no modal
+    const eventoNome = modal.getAttribute('data-evento-nome') || 'Evento Especial';
+    const eventoData = modal.getAttribute('data-evento-data') || 'Data a confirmar';
+    const eventoDesc = modal.getAttribute('data-evento-desc') || 'Evento na Nostra Massa';
     
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(dataBlob);
-    link.download = 'clube-emails-' + new Date().toISOString().split('T')[0] + '.json';
-    link.click();
+    // Atualizar os elementos visuais do modal
+    document.getElementById('evento-nome-modal').textContent = eventoNome;
+    document.getElementById('evento-data-modal').textContent = eventoData;
+    document.getElementById('evento-descricao-modal').textContent = eventoDesc;
+    
+    console.log('Modal preenchido com:', {eventoNome, eventoData, eventoDesc});
+    
+    modal.style.display = 'block';
+  } else {
+    console.error('Modal não encontrado!');
+  }
+}
+
+function fecharModal() {
+  console.log('Fechando modal...');
+  const modal = document.getElementById('modal-reserva');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function enviarReserva(e) {
+  e.preventDefault();
+  console.log('Enviando reserva...');
+  
+  const nome = document.getElementById('nome-reserva').value;
+  const email = document.getElementById('email-reserva').value;
+  const telefone = document.getElementById('telefone-reserva').value;
+  
+  // Validar campos obrigatórios
+  if (!nome || !email) {
+    mostrarNotificacao('erro', 'Campos obrigatórios', 'Por favor, preencha nome e email!');
+    return;
+  }
+  
+  // Validar telefone se foi preenchido
+  if (telefone) {
+    const numerosSomente = telefone.replace(/\D/g, '');
+    if (numerosSomente.length < 10 || numerosSomente.length > 11) {
+      mostrarNotificacao('erro', 'Telefone inválido', 'Digite um telefone válido. Ex: (16) 99999-9999');
+      return;
+    }
+    
+    if (numerosSomente[2] === '0' || numerosSomente[2] === '1') {
+      mostrarNotificacao('erro', 'Telefone inválido', 'O terceiro dígito não pode ser 0 ou 1.');
+      return;
+    }
+  }
+  
+  // Capturar dados do evento do modal
+  const modal = document.getElementById('modal-reserva');
+  const eventoNome = modal.getAttribute('data-evento-nome') || 'Evento Especial';
+  const eventoData = modal.getAttribute('data-evento-data') || 'Data a confirmar';
+  const eventoDesc = modal.getAttribute('data-evento-desc') || 'Evento na Nostra Massa';
+  
+  const btnSubmit = document.querySelector('.btn-confirmar-reserva');
+  btnSubmit.disabled = true;
+  btnSubmit.textContent = 'Enviando...';
+  
+  // Formatar telefone para o email
+  const telefoneFormatado = telefone ? telefone : 'Não informado';
+  
+  // Parâmetros finais para o email
+  const parametrosEmail = {
+    to_name: nome,
+    to_email: email,
+    evento_nome: eventoNome,
+    evento_data: eventoData,
+    evento_descricao: eventoDesc,
+    cliente_telefone: telefoneFormatado
+  };
+  
+  console.log('Parâmetros que serão enviados:', parametrosEmail);
+  
+  // Enviar email via EmailJS
+  emailjs.send('service_5gck5a5', 'template_dc9tzmt', parametrosEmail)
+    .then(function(response) {
+      console.log('SUCCESS!', response);
+      
+      // Mostrar notificação de sucesso
+      mostrarNotificacao('sucesso', 
+        `Reserva confirmada para "${eventoNome}"!`, 
+        'Verifique sua caixa de entrada e também a pasta de spam.'
+      );
+      
+      // Fechar modal e limpar formulário
+      fecharModal();
+      document.getElementById('form-reserva').reset();
+      
+    }).catch(function(error) {
+      console.error('ERROR:', error);
+      
+      // Mostrar notificação de erro
+      mostrarNotificacao('erro', 
+        'Erro ao enviar email', 
+        'Tente novamente em alguns instantes.'
+      );
+      
+    }).finally(function() {
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = 'Confirmar Reserva';
+    });
+}
+
+// Funções para notificações
+function mostrarNotificacao(tipo, titulo, mensagem) {
+  const notificacaoId = tipo === 'sucesso' ? 'notificacao-sucesso' : 'notificacao-erro';
+  const notificacao = document.getElementById(notificacaoId);
+  
+  if (notificacao) {
+    // Atualizar textos se fornecidos
+    if (titulo) {
+      notificacao.querySelector('h3').textContent = titulo;
+    }
+    if (mensagem) {
+      notificacao.querySelector('p').textContent = mensagem;
+    }
+    
+    // Mostrar notificação
+    notificacao.classList.add('mostrar');
+    
+    // Auto-fechar após 5 segundos
+    setTimeout(() => {
+      fecharNotificacao(notificacaoId);
+    }, 5000);
+  }
+}
+
+function fecharNotificacao(id) {
+  const notificacao = id ? document.getElementById(id) : 
+    document.querySelector('.notificacao.mostrar');
+  
+  if (notificacao) {
+    notificacao.classList.add('saindo');
+    
+    setTimeout(() => {
+      notificacao.classList.remove('mostrar', 'saindo');
+    }, 400);
+  }
+}
+function inicializarClube() {
+  console.log('Inicializando Clube da Pizza...');
+  
+  const formClube = document.getElementById('clube-form');
+  if (formClube) {
+    formClube.addEventListener('submit', enviarClubeEmail);
+    console.log('Formulário do clube encontrado e configurado');
+  }
+}
+
+function enviarClubeEmail(e) {
+  e.preventDefault();
+  console.log('Enviando cadastro do clube...');
+  
+  const emailInput = document.getElementById('email-input');
+  const email = emailInput.value.trim();
+  
+  console.log('Email digitado:', email);
+  
+  if (!email) {
+    mostrarNotificacao('erro', 'Email obrigatório', 'Por favor, digite seu email!');
+    return;
+  }
+  
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    mostrarNotificacao('erro', 'Email inválido', 'Por favor, digite um email válido!');
+    return;
+  }
+  
+  const nome = email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1);
+  console.log('Nome extraído:', nome);
+  
+  const btnSubmit = document.querySelector('.btn-clube');
+  btnSubmit.disabled = true;
+  btnSubmit.textContent = 'Enviando...';
+  
+  const parametros = {
+    to_name: nome,
+    to_email: email
+  };
+  
+  console.log('Parâmetros que serão enviados:', parametros);
+  console.log('Service ID: service_5gck5a5');
+  console.log('Template ID: template_88bct1w');
+  
+  // Enviar email via EmailJS
+  emailjs.send('service_5gck5a5', 'template_88bct1w', parametros)
+    .then(function(response) {
+      console.log('SUCCESS!', response);
+      mostrarNotificacao('sucesso', 
+        'Bem-vindo(a) ao Clube Nostra Massa! 🍕', 
+        'Verifique seu email para confirmar o cadastro.'
+      );
+      emailInput.value = '';
+    }).catch(function(error) {
+      console.error('ERROR COMPLETO:', error);
+      console.error('Error text:', error.text);
+      console.error('Error status:', error.status);
+      
+      mostrarNotificacao('erro', 
+        'Erro ao cadastrar no clube', 
+        'Erro: ' + (error.text || error.message || 'Tente novamente')
+      );
+    }).finally(function() {
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = 'Participar';
+    });
 }

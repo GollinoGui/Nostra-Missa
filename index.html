@@ -10,6 +10,15 @@
   <link rel="stylesheet" href="project_root/css/home.css" />
   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+   emailjs.init({
+     publicKey: 'QA4Kynn7C1ejXygzH',
+   });
+   console.log('EmailJS v4 inicializado!');
+</script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
 </head>
 <body>
@@ -268,7 +277,7 @@
         <div class="evento-info">
           <h3>Noite Napolitana</h3>
           <p>Degustação especial de pizzas napolitanas com harmonização de vinhos.</p>
-          <a href="#reservar" class="btn-evento">Reservar</a>
+          <a href="#modal-reserva" class="btn-evento">Reservar</a>
         </div>
       </div>
       <div class="evento-card">
@@ -279,7 +288,7 @@
         <div class="evento-info">
           <h3>Workshop de Massas</h3>
           <p>Aprenda a fazer massa de pizza artesanal com nosso chef italiano.</p>
-          <a href="#reservar" class="btn-evento">Reservar</a>
+          <a href="#modal-reserva" class="btn-evento">Reservar</a>
         </div>
       </div>
       <div class="evento-card">
@@ -290,7 +299,7 @@
         <div class="evento-info">
           <h3>Festival de Sabores</h3>
           <p>Rodízio especial com todas as nossas pizzas premiadas.</p>
-          <a href="#reservar" class="btn-evento">Reservar</a>
+          <a href="#modal-reserva" class="btn-evento">Reservar</a>
         </div>
       </div>
     </div>
@@ -416,7 +425,7 @@
         <li><i class="fas fa-check-circle"></i> Convites para eventos gastronômicos</li>
         <li><i class="fas fa-check-circle"></i> Receitas exclusivas do nosso chef</li>
       </ul>
-      <!-- Substitua este trecho nas linhas 182-185 -->
+      
 <form class="clube-form" id="clube-form">
   <input type="email" id="email-input" placeholder="Seu melhor e-mail" required>
   <button type="submit" class="btn-clube">Participar</button>
@@ -464,5 +473,49 @@
     <script src="project_root/js/script.js"></script>
   <!-- Adicione antes do fechamento do </body> -->
   
+  <!-- Modal de Reserva -->
+<div id="modal-reserva" class="modal-reserva">
+  <div class="modal-reserva-content">
+    <span class="close-reserva">&times;</span>
+    <h2>Confirmar Reserva</h2>
+    
+    <div class="evento-info-modal">
+      <h3 id="evento-nome-modal">Nome do Evento</h3>
+      <p><strong>Data:</strong> <span id="evento-data-modal">Data</span></p>
+      <p id="evento-descricao-modal">Descrição do evento</p>
+    </div>
+    
+    <form class="form-reserva" id="form-reserva">
+      <input type="text" id="nome-reserva" placeholder="Seu nome completo" required>
+      <input type="email" id="email-reserva" placeholder="Seu melhor e-mail" required>
+      <input type="tel" id="telefone-reserva" placeholder="(16) 99999-9999 (opcional)" maxlength="15">
+      <button type="submit" class="btn-confirmar-reserva">Confirmar Reserva</button>
+    </form>
+  </div>
+</div>
+<!-- Notificação de Sucesso -->
+<div id="notificacao-sucesso" class="notificacao">
+  <div class="notificacao-content">
+    <div class="notificacao-icon">✅</div>
+    <div class="notificacao-texto">
+      <h3>Email enviado com sucesso!</h3>
+      <p>Verifique sua caixa de entrada e também a pasta de spam.</p>
+    </div>
+    <button class="notificacao-fechar" onclick="fecharNotificacao()">&times;</button>
+  </div>
+</div>
+
+<!-- Notificação de Erro -->
+<div id="notificacao-erro" class="notificacao notificacao-erro">
+  <div class="notificacao-content">
+    <div class="notificacao-icon">❌</div>
+    <div class="notificacao-texto">
+      <h3>Erro ao enviar email</h3>
+      <p>Tente novamente em alguns instantes.</p>
+    </div>
+    <button class="notificacao-fechar" onclick="fecharNotificacao()">&times;</button>
+  </div>
+</div>
+
 </body>
 </html>
