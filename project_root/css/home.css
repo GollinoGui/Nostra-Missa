@@ -104,21 +104,20 @@ body {
 
 /* NOVA SEÇÃO: QUEM SOMOS */
 .quem-somos {
-  padding: 4rem 2rem;
-  background-color: #f9f5f0;
-}
-
-.quem-somos-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.quem-somos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
+    padding: 2rem 1rem;
+  }
+  
+  .quem-somos-container {
+    width: 100%;
+    padding: 0;
+  }
+  
+  .quem-somos-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+  }
 
 .sobre-card {
   background-color: white;
@@ -1412,4 +1411,480 @@ margin-left: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   position: relative;
+}
+
+/* RESPONSIVIDADE GERAL DA HOME */
+
+/* Tablets e telas médias (768px - 1024px) */
+@media (max-width: 1024px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+    margin-top: 2rem;
+  }
+  
+  .pizza-builder {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .headline-central {
+    font-size: 2rem;
+  }
+  
+  .segredo-video {
+    min-width: 500px;
+  }
+  
+  .clube-content h2 {
+    font-size: 1.8rem;
+    margin-left: 0;
+    text-align: center;
+  }
+  
+  .clube-content p,
+  .clube-beneficios {
+    margin-left: 0;
+    text-align: center;
+  }
+}
+
+/* Smartphones e telas pequenas (até 768px) */
+@media (max-width: 768px) {
+  /* Hero Section */
+  .hero-section {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  
+  .hero-content {
+    padding-right: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+    margin-top: 1rem;
+  }
+  
+  .hero-buttons {
+    justify-content: center;
+  }
+  
+  .btn-hero {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .pizza-builder {
+    width: 250px;
+    height: 250px;
+  }
+  
+  /* Headlines */
+  .headline-central {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Mapa das Origens */
+  .mapa-container {
+    flex-direction: column;
+  }
+  
+  .mapa-italia img {
+    max-width: 300px;
+  }
+  
+  .regiao-info {
+    width: 150px;
+    font-size: 0.8rem;
+  }
+  
+  /* Experiência Sensorial */
+  .sentidos-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .sentido-card {
+    padding: 1.5rem;
+  }
+  
+  /* Eventos */
+  .eventos-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .evento-card {
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 1rem;
+  }
+  
+  /* Segredos da Cozinha */
+  .segredos-container {
+    flex-direction: column;
+  }
+  
+  .segredo-video {
+    min-width: 100%;
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .segredo-video video {
+    max-height: 250px;
+  }
+  
+  .segredo-item {
+    padding-left: 2rem;
+  }
+  
+  .segredo-numero {
+    font-size: 1.5rem;
+  }
+  
+  /* Menu Sazonal */
+  .sazonal-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .sazonal-item {
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  /* Clube da Pizza */
+  .clube-pizza {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  
+  .clube-content {
+    min-width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  .clube-content h2 {
+    font-size: 1.8rem;
+    margin-left: 0;
+  }
+  
+  .clube-content p,
+  .clube-beneficios {
+    margin-left: 0;
+  }
+  
+  .clube-form {
+    max-width: 100%;
+    margin: 1rem 0;
+  }
+  
+  .clube-form input {
+    margin-bottom: 1rem;
+  }
+  
+  .clube-imagem {
+    min-width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .clube-imagem img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* App Section */
+  .app-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  
+  .app-mockup {
+    margin-bottom: 2rem;
+  }
+  
+  .app-mockup img {
+    max-width: 200px;
+  }
+  
+  .app-content h2 {
+    font-size: 1.8rem;
+  }
+  
+  .app-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .btn-app {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+  
+  /* Estatísticas */
+  .estatisticas-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .estatistica-item {
+    flex: none;
+    padding: 1.5rem;
+  }
+  
+  .contador {
+    font-size: 2rem;
+  }
+  
+  /* Sabores Mais Amados */
+  .sabores-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sabor-card {
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 1rem;
+  }
+  
+  /* Galeria de Pizzas */
+  .galeria-pizzas-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  
+  /* Calendário Modal */
+  .modal-content {
+    width: 95%;
+    margin: 2% auto;
+    padding: 15px;
+  }
+  
+  .calendario-grid,
+  .dias-calendario {
+    font-size: 0.8rem;
+  }
+  
+  .dia {
+    min-height: 40px;
+    max-height: 60px;
+  }
+  
+  .evento-item {
+    font-size: 8px;
+  }
+  
+  /* Ajustes gerais */
+  .fade-in {
+    padding: 0 1rem;
+  }
+  
+  /* Espaçamentos */
+  section {
+    padding: 2rem 1rem;
+  }
+}
+
+/* Smartphones muito pequenos (até 480px) */
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .headline-central {
+    font-size: 1.5rem;
+  }
+  
+  .pizza-builder {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .btn-hero {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .evento-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .evento-data {
+    min-width: 100%;
+    padding: 0.5rem;
+  }
+  
+  .galeria-pizzas-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-content {
+    width: 98%;
+    padding: 10px;
+  }
+  
+  .contador {
+    font-size: 1.8rem;
+  }
+  
+  .clube-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .app-content h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Ajustes para o header responsivo */
+@media (max-width: 768px) {
+  .top-bar {
+    height: 80px;
+    padding: 0 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logo-container {
+    margin-right: 0;
+  }
+  
+  .logo {
+    transform: translateY(20px);
+  }
+  
+  .logo img {
+    height: 100px;
+  }
+  
+  .nav-links {
+    margin-top: 10px;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .nav-links a {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+  }
+  
+  main {
+    padding-top: 120px;
+  }
+}
+
+/* Melhorias para touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .btn-hero:hover,
+  .btn-app:hover,
+  .btn-evento:hover {
+    transform: none;
+  }
+  
+  .sentido-card:hover,
+  .evento-card:hover,
+  .sabor-card:hover {
+    transform: none;
+  }
+  
+  .galeria-pizzas-grid img:hover {
+    transform: none;
+  }
+}
+@media (max-width: 768px) {
+  .top-bar {
+    height: auto;
+    min-height: 80px;
+    padding: 10px 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .logo-container {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .logo {
+    transform: translateY(10px);
+  }
+  
+  .logo img {
+    height: 80px;
+  }
+  
+  .nav-links {
+    margin-top: 0;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .nav-links a {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    white-space: nowrap;
+  }
+  
+  main {
+    padding-top: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-bar {
+    padding: 8px 15px;
+  }
+  
+  .logo img {
+    height: 70px;
+  }
+  
+  .nav-links {
+    gap: 10px;
+  }
+  
+  .nav-links a {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.8rem;
+  }
+  
+  main {
+    padding-top: 120px;
+  }
+}
+
+/* Para telas muito pequenas, empilhar os links verticalmente */
+@media (max-width: 360px) {
+  .nav-links {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+  
+  .nav-links a {
+    width: 100%;
+    text-align: center;
+    max-width: 200px;
+  }
+  
+  main {
+    padding-top: 180px;
+  }
 }
