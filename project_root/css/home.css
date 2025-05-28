@@ -1175,7 +1175,31 @@ margin-left: 200px;
 }
 
 /* Responsividade */
-
+@media (max-width: 768px) {
+  .clube-form {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .clube-form input {
+    border-radius: 30px;
+    margin-bottom: 1rem;
+  }
+  
+  .btn-clube {
+    border-radius: 30px;
+    width: 100%;
+  }
+  
+  .app-buttons {
+    flex-direction: column;
+  }
+  
+  .btn-app {
+    width: 100%;
+    justify-content: center;
+  }
+}
 .modal {
   display: none;
   position: fixed;

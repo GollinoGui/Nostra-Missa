@@ -1,7 +1,6 @@
 // script.js
 function getCurrentPage() {
   const path = window.location.pathname;
-  if (path.includes('sobrenos.html')) return 'sobre';
   if (path.includes('cardapio.html')) return 'cardapio';
   if (path.includes('unidades.html')) return 'unidades';
   if (path.includes('contato.html')) return 'contato';
@@ -232,24 +231,7 @@ function carregarConteudoEspecifico() {
       `;
       break;
     case 'sobre':
-      if (sobreNosEnhancementsLoaded) {
-        console.log('Melhorias do Sobre Nós já carregadas, pulando carregamento básico');
-        // Apenas inicializar componentes
-        setTimeout(() => {
-          initAccordion();
-          
-          
-          // Adicionar classe 'visible' aos elementos fade-in
-          document.querySelectorAll('.fade-in').forEach(el => {
-            el.classList.add('visible');
-          });
-          
-          // Corrigir visibilidade e estilos
-          corrigirVisibilidadeConteudo();
-           aplicarEstiloItalianoPainel();
-        }, 300);
-        return;
-      }
+      
       
     case 'cardapio':
       panelContent.innerHTML = `
@@ -712,68 +694,8 @@ function animateTimeline() {
     }, index * 300);
   });
 }
-function removerSecoesDuplicadas() {
-  // Obter todas as seções de depoimentos
-  const secoes = document.querySelectorAll('.depoimentos');
-  
-  // Se houver mais de uma seção de depoimentos, manter apenas a última
-  if (secoes.length > 1) {
-    // Remover todas exceto a última
-    for (let i = 0; i < secoes.length - 1; i++) {
-      secoes[i].remove();
-    }
-  }
-}
-function aplicarEstiloItalianoPainel() {
-  const currentPage = getCurrentPage();
-  const bottomPanel = document.getElementById('bottomPanel');
-  
-  if (!bottomPanel) return;
-  
-  // Remover qualquer classe de tema anterior
-  bottomPanel.classList.remove('tema-italiano');
-  
-  // Aplicar o tema italiano apenas na página Sobre Nós
-  if (currentPage === 'sobre') {
-    console.log('Aplicando tema italiano ao painel na página Sobre Nós');
-    bottomPanel.classList.add('tema-italiano');
-  }
-}
-function adicionarManchasMolho() {
-  if (getCurrentPage() !== 'sobre') return;
-  
-  const bottomPanel = document.getElementById('bottomPanel');
-  if (!bottomPanel) return;
-  
-  // Criar 3 manchas aleatórias
-  for (let i = 0; i < 3; i++) {
-    const mancha = document.createElement('div');
-    mancha.className = 'mancha-molho';
-    
-    // Posição aleatória
-    const top = Math.random() * 80 + 10; // 10-90%
-    const left = Math.random() * 80 + 10; // 10-90%
-    
-    // Tamanho aleatório
-    const size = Math.random() * 100 + 50; // 50-150px
-    
-    // Rotação aleatória
-    const rotate = Math.random() * 360;
-    
-    mancha.style.position = 'absolute';
-    mancha.style.top = `${top}%`;
-    mancha.style.left = `${left}%`;
-    mancha.style.width = `${size}px`;
-    mancha.style.height = `${size}px`;
-    mancha.style.borderRadius = '50%';
-    mancha.style.background = 'radial-gradient(circle, rgba(206,43,55,0.15) 0%, rgba(206,43,55,0) 70%)';
-    mancha.style.transform = `rotate(${rotate}deg)`;
-    mancha.style.zIndex = '-1';
-    mancha.style.pointerEvents = 'none';
-    
-    bottomPanel.appendChild(mancha);
-  }
-}
+
+
 
 // Chamar a função após carregar o conteúdo
 document.addEventListener('DOMContentLoaded', () => {
@@ -783,35 +705,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(adicionarManchasMolho, 500);
 });
 
-function aplicarCursoresPizza() {
-  if (getCurrentPage() !== 'sobre') return;
-  
-  const bottomPanel = document.getElementById('bottomPanel');
-  if (!bottomPanel || !bottomPanel.classList.contains('tema-italiano')) return;
-  
-  console.log('Aplicando cursores de pizza personalizados');
-  
-  // Garantir que os cursores personalizados sejam aplicados a elementos dinâmicos
-  const elementosClicaveis = bottomPanel.querySelectorAll('a, button, .accordion-header, .galeria-item, .swiper-button-next, .swiper-button-prev, .timeline-dot, .estatistica-item');
-  
-  elementosClicaveis.forEach(elemento => {
-    // Adicionar classe para facilitar a aplicação do CSS
-    elemento.classList.add('cursor-pizza-fatia');
-    
-    // Adicionar eventos para garantir que o cursor mude corretamente
-    elemento.addEventListener('mousedown', () => {
-      elemento.classList.add('cursor-pizza-mordida');
-    });
-    
-    elemento.addEventListener('mouseup', () => {
-      elemento.classList.remove('cursor-pizza-mordida');
-    });
-    
-    elemento.addEventListener('mouseleave', () => {
-      elemento.classList.remove('cursor-pizza-mordida');
-    });
-  });
-}
 
 // Chamar a função após carregar o conteúdo e sempre que o conteúdo for atualizado
 document.addEventListener('DOMContentLoaded', () => {
