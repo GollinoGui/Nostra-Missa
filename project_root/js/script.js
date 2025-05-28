@@ -588,65 +588,99 @@ document.addEventListener('DOMContentLoaded', function() {
   const mesAtual = dataAtual.getMonth();
   
   // Gerar o calendário inicial
-  gerarCalendario(anoAtual, mesAtual);
+  if (document.getElementById('dias-calendario')) {
+    gerarCalendario(anoAtual, mesAtual);
+  }
   
   // Adicionar eventos para os botões de navegação
-  document.getElementById('mes-anterior').addEventListener('click', function() {
-    const mesAtualEl = document.getElementById('mes-atual');
-    const [nomeMes, ano] = mesAtualEl.textContent.split(' ');
-    const nomesMeses = [
-      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-    ];
-    let mes = nomesMeses.indexOf(nomeMes);
-    let anoNum = parseInt(ano);
-    
-    mes--;
-    if (mes < 0) {
-      mes = 11;
-      anoNum--;
-    }
-    
-    gerarCalendario(anoNum, mes);
-  });
+  const btnAnterior = document.getElementById('mes-anterior');
+  const btnProximo = document.getElementById('proximo-mes');
+  const btnCalendario = document.getElementById('btn-calendario-completo');
+  const closeModal = document.querySelector('.close-modal');
+  const calendarioModal = document.getElementById('calendario-modal');
   
-  document.getElementById('proximo-mes').addEventListener('click', function() {
-    const mesAtualEl = document.getElementById('mes-atual');
-    const [nomeMes, ano] = mesAtualEl.textContent.split(' ');
-    const nomesMeses = [
-      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-    ];
-    let mes = nomesMeses.indexOf(nomeMes);
-    let anoNum = parseInt(ano);
-    
-    mes++;
-    if (mes > 11) {
-      mes = 0;
-      anoNum++;
-    }
-    
-    gerarCalendario(anoNum, mes);
-  });
+  if (btnAnterior) {
+    btnAnterior.addEventListener('click', function() {
+      const mesAtualEl = document.getElementById('mes-atual');
+      if (!mesAtualEl) return;
+      
+      const [nomeMes, ano] = mesAtualEl.textContent.split(' ');
+      const nomesMeses = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ];
+      let mes = nomesMeses.indexOf(nomeMes);
+      let anoNum = parseInt(ano);
+      
+      mes--;
+      if (mes < 0) {
+        mes = 11;
+        anoNum--;
+      }
+      
+      gerarCalendario(anoNum, mes);
+    });
+  }
+  
+  if (btnProximo) {
+    btnProximo.addEventListener('click', function() {
+      const mesAtualEl = document.getElementById('mes-atual');
+      if (!mesAtualEl) return;
+      
+      const [nomeMes, ano] = mesAtualEl.textContent.split(' ');
+      const nomesMeses = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ];
+      let mes = nomesMeses.indexOf(nomeMes);
+      let anoNum = parseInt(ano);
+      
+      mes++;
+      if (mes > 11) {
+        mes = 0;
+        anoNum++;
+      }
+      
+      gerarCalendario(anoNum, mes);
+    });
+  }
   
   // Abrir modal do calendário
-  document.getElementById('btn-calendario-completo').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.getElementById('calendario-modal').style.display = 'block';
-  });
+  if (btnCalendario && calendarioModal) {
+    btnCalendario.addEventListener('click', function(e) {
+      e.preventDefault();
+      calendarioModal.style.display = 'block';
+    });
+  }
   
-  // Fechar modal
-  document.querySelector('.close-modal').addEventListener('click', function() {
-    document.getElementById('calendario-modal').style.display = 'none';
-  });
+  // Função para voltar ao mês atual
+  function voltarMesAtual() {
+    const hoje = new Date();
+    console.log('Voltando para:', hoje.getFullYear(), hoje.getMonth());
+    gerarCalendario(hoje.getFullYear(), hoje.getMonth());
+  }
   
-  // Fechar modal ao clicar fora
-  window.addEventListener('click', function(e) {
-    if (e.target === document.getElementById('calendario-modal')) {
-      document.getElementById('calendario-modal').style.display = 'none';
-    }
-  });
+  // Fechar modal e voltar para o mês atual
+  if (closeModal && calendarioModal) {
+    closeModal.addEventListener('click', function() {
+      console.log('Fechando modal pelo X');
+      calendarioModal.style.display = 'none';
+      voltarMesAtual();
+    });
+  }
+  
+  // Fechar modal ao clicar fora e voltar para o mês atual
+  if (calendarioModal) {
+    window.addEventListener('click', function(e) {
+      if (e.target === calendarioModal) {
+        console.log('Fechando modal clicando fora');
+        calendarioModal.style.display = 'none';
+        voltarMesAtual();
+      }
+    });
+  }
 });
+
 function gerarCalendario(ano, mes) {
   // Obter o elemento onde o calendário será renderizado
   const calendario = document.getElementById('dias-calendario');
@@ -723,71 +757,6 @@ function gerarCalendario(ano, mes) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  const dataAtual = new Date();
-  const anoAtual = dataAtual.getFullYear();
-  const mesAtual = dataAtual.getMonth();
-  
-  // Gerar o calendário inicial
-  gerarCalendario(anoAtual, mesAtual);
-  
-  // Adicionar eventos para os botões de navegação
-  document.getElementById('mes-anterior').addEventListener('click', function() {
-    const mesAtualEl = document.getElementById('mes-atual');
-    const [nomeMes, ano] = mesAtualEl.textContent.split(' ');
-    const nomesMeses = [
-      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-    ];
-    let mes = nomesMeses.indexOf(nomeMes);
-    let anoNum = parseInt(ano);
-    
-    mes--;
-    if (mes < 0) {
-      mes = 11;
-      anoNum--;
-    }
-    
-    gerarCalendario(anoNum, mes);
-  });
-  
-  document.getElementById('proximo-mes').addEventListener('click', function() {
-    const mesAtualEl = document.getElementById('mes-atual');
-    const [nomeMes, ano] = mesAtualEl.textContent.split(' ');
-    const nomesMeses = [
-      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-    ];
-    let mes = nomesMeses.indexOf(nomeMes);
-    let anoNum = parseInt(ano);
-    
-    mes++;
-    if (mes > 11) {
-      mes = 0;
-      anoNum++;
-    }
-    
-    gerarCalendario(anoNum, mes);
-  });
-  
-  // Abrir modal do calendário
-  document.getElementById('btn-calendario-completo').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.getElementById('calendario-modal').style.display = 'block';
-  });
-  
-  // Fechar modal
-  document.querySelector('.close-modal').addEventListener('click', function() {
-    document.getElementById('calendario-modal').style.display = 'none';
-  });
-  
-  // Fechar modal ao clicar fora
-  window.addEventListener('click', function(e) {
-    if (e.target === document.getElementById('calendario-modal')) {
-      document.getElementById('calendario-modal').style.display = 'none';
-    }
-  });
-});
 
 // Inicializar EmailJS
 (function(){
