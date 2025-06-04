@@ -45,50 +45,9 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
       animarContadores();
     }, 1000);
-    initReservas();
+    inicializarReservas();
   }
 });
-
-// Inicialização quando a página carrega
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM carregado, página:', getCurrentPage());
-  
-  // Inicializar contadores da home
-  if (getCurrentPage() === 'home') {
-    verificarContadoresVisiveis();
-  }
-});
-
-// Também inicializar quando a janela carrega completamente
-window.addEventListener('load', function() {
-  console.log('Janela carregada completamente, página:', getCurrentPage());
-  
-  // Backup: tentar inicializar contadores novamente se for a home
-  if (getCurrentPage() === 'home') {
-    setTimeout(() => {
-      const estatisticasSection = document.querySelector('.estatisticas-home');
-      if (estatisticasSection) {
-        const contadores = estatisticasSection.querySelectorAll('.contador');
-        // Se os contadores ainda estão em 0, animar
-        const precisaAnimar = Array.from(contadores).some(contador => 
-          contador.textContent === '0' || contador.textContent === ''
-        );
-        
-        if (precisaAnimar) {
-          console.log('Executando animação de backup dos contadores');
-          animarContadoresHome();
-        }
-      }
-    }, 2000);
-  }
-});
-
-
-
-
-
-
-
 
 // Função para carregar o conteúdo apropriado para cada página
 function carregarConteudoEspecifico() {
@@ -128,7 +87,7 @@ function carregarConteudoEspecifico() {
       break;
       case 'unidades':
         
-        corrigirVisibilidadeConteudo();
+        
         break;      
     case 'contato':
       panelContent.innerHTML = `
@@ -175,7 +134,7 @@ function carregarConteudoEspecifico() {
   
   
   // Corrigir visibilidade e estilos
-  corrigirVisibilidadeConteudo();
+  
 }
 
 // Lista completa de pizzas (salgadas e doces)
@@ -423,7 +382,6 @@ function renderCardapio() {
 // Modifique o evento DOMContentLoaded para incluir a carga de conteúdo específico
 document.addEventListener('DOMContentLoaded', () => {
   carregarConteudoEspecifico(); // Carregar conteúdo específico para a página atual
-  addDecorativeUtensils();
   aplicarEstiloItalianoPainel();
 if (!document.querySelector('.galeria-modal')) {
     const modal = document.createElement('div');
@@ -451,20 +409,15 @@ if (!document.querySelector('.galeria-modal')) {
   }
   if (getCurrentPage() === 'cardapio') {
     renderCardapio();
-  }
-   setupUtensils();  
+  }  
 
   debugButton.addEventListener('click', () => {
     carregarConteudoEspecifico();
     if (getCurrentPage() === 'cardapio') renderCardapio();
-    corrigirVisibilidadeConteudo();
+    
   });
   document.body.appendChild(debugButton);
 }); 
-
-
-
-
 
 // Adicione esta função para animar a timeline
 function animateTimeline() {
@@ -527,8 +480,63 @@ function gerarCalendario(ano, mes) {
   // Atualizar o título do mês
   document.getElementById('mes-atual').textContent = `${nomesMeses[mes]} ${ano}`;
   
-  // Eventos (exemplo)
-  const eventos = [
+  // Lista de eventos possíveis para gerar aleatoriamente
+  const tiposEventos = [
+    { titulo: 'Noite Napolitana', tipo: 'degustacao' },
+    { titulo: 'Workshop de Massas', tipo: 'workshop' },
+    { titulo: 'Festival de Sabores', tipo: 'festival' },
+    { titulo: 'Vinhos Italianos', tipo: 'degustacao' },
+    { titulo: 'Segredos do Molho', tipo: 'workshop' },
+    { titulo: 'Pizza Week', tipo: 'festival' },
+    { titulo: 'Degustação Especial', tipo: 'degustacao' },
+    { titulo: 'Aula de Culinária', tipo: 'workshop' },
+    { titulo: 'Noite Italiana', tipo: 'festival' },
+    { titulo: 'Harmonização', tipo: 'degustacao' },
+    { titulo: 'Master Class', tipo: 'workshop' },
+    { titulo: 'Festa da Pizza', tipo: 'festival' },
+    { titulo: 'Prova de Vinhos', tipo: 'degustacao' },
+    { titulo: 'Curso de Massas', tipo: 'workshop' },
+    { titulo: 'Rodízio Especial', tipo: 'festival' }
+  ];
+  
+  // Função para gerar eventos aleatórios para o mês
+  function gerarEventosAleatorios(ano, mes, ultimoDia) {
+    const eventos = [];
+    
+    // Gerar entre 8 a 15 eventos aleatórios no mês
+    const numeroEventos = Math.floor(Math.random() * 3) + 3;
+    
+    for (let i = 0; i < numeroEventos; i++) {
+      // Dia aleatório do mês (evita os primeiros 3 dias para parecer mais realista)
+      const diaAleatorio = Math.floor(Math.random() * (ultimoDia - 3)) + 4;
+      
+      // Evento aleatório da lista
+      const eventoAleatorio = tiposEventos[Math.floor(Math.random() * tiposEventos.length)];
+      
+      // Verifica se já não existe um evento neste dia
+      const jaExiste = eventos.some(evento => 
+        evento.data.getDate() === diaAleatorio && 
+        evento.data.getMonth() === mes && 
+        evento.data.getFullYear() === ano
+      );
+      
+      if (!jaExiste) {
+        eventos.push({
+          data: new Date(ano, mes, diaAleatorio),
+          titulo: eventoAleatorio.titulo,
+          tipo: eventoAleatorio.tipo
+        });
+      }
+    }
+    
+    return eventos;
+  }
+  
+  // Gerar eventos aleatórios para este mês
+  const eventos = gerarEventosAleatorios(ano, mes, ultimoDia);
+  
+  // Adicionar alguns eventos fixos para os próximos meses (para consistência)
+  const eventosFixos = [
     { data: new Date(2023, 5, 15), titulo: 'Noite Napolitana', tipo: 'degustacao' },
     { data: new Date(2023, 5, 22), titulo: 'Workshop de Massas', tipo: 'workshop' },
     { data: new Date(2023, 5, 30), titulo: 'Festival de Sabores', tipo: 'festival' },
@@ -536,6 +544,20 @@ function gerarCalendario(ano, mes) {
     { data: new Date(2023, 6, 18), titulo: 'Segredos do Molho', tipo: 'workshop' },
     { data: new Date(2023, 7, 10), titulo: 'Pizza Week', tipo: 'festival' }
   ];
+  
+  // Adicionar eventos fixos se estiverem no mês atual
+  eventosFixos.forEach(eventoFixo => {
+    if (eventoFixo.data.getMonth() === mes && eventoFixo.data.getFullYear() === ano) {
+      // Verifica se não conflita com eventos aleatórios
+      const conflito = eventos.some(evento => 
+        evento.data.getDate() === eventoFixo.data.getDate()
+      );
+      
+      if (!conflito) {
+        eventos.push(eventoFixo);
+      }
+    }
+  });
   
   // Adicionar células vazias para os dias antes do primeiro dia do mês
   for (let i = 0; i < primeiroDiaSemana; i++) {
@@ -569,18 +591,28 @@ function gerarCalendario(ano, mes) {
     if (eventosNoDia.length > 0) {
       diaEl.classList.add('dia-evento');
       
-      // Adicionar os eventos do dia
-      eventosNoDia.forEach(evento => {
+      // Adicionar os eventos do dia (máximo 2 para não sobrecarregar visualmente)
+      const eventosParaMostrar = eventosNoDia.slice(0, 2);
+      eventosParaMostrar.forEach(evento => {
         const eventoEl = document.createElement('div');
         eventoEl.className = `evento-item evento-${evento.tipo}`;
         eventoEl.textContent = evento.titulo;
         diaEl.appendChild(eventoEl);
       });
+      
+      // Se houver mais de 2 eventos, mostrar um indicador
+      if (eventosNoDia.length > 2) {
+        const maisEventos = document.createElement('div');
+        maisEventos.className = 'evento-item mais-eventos';
+        maisEventos.textContent = `+${eventosNoDia.length - 2} eventos`;
+        diaEl.appendChild(maisEventos);
+      }
     }
     
     calendario.appendChild(diaEl);
   }
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
   const dataAtual = new Date();
@@ -681,81 +713,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-function gerarCalendario(ano, mes) {
-  // Obter o elemento onde o calendário será renderizado
-  const calendario = document.getElementById('dias-calendario');
-  calendario.innerHTML = '';
-  
-  // Criar uma data para o primeiro dia do mês
-  const primeiroDia = new Date(ano, mes, 1);
-  // Obter o último dia do mês
-  const ultimoDia = new Date(ano, mes + 1, 0).getDate();
-  // Obter o dia da semana do primeiro dia (0 = Domingo, 6 = Sábado)
-  const primeiroDiaSemana = primeiroDia.getDay();
-  
-  // Nomes dos meses em português
-  const nomesMeses = [
-    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-  ];
-  
-  // Atualizar o título do mês
-  document.getElementById('mes-atual').textContent = `${nomesMeses[mes]} ${ano}`;
-  
-  // Eventos (exemplo)
-  const eventos = [
-    { data: new Date(2023, 5, 15), titulo: 'Noite Napolitana', tipo: 'degustacao' },
-    { data: new Date(2023, 5, 22), titulo: 'Workshop de Massas', tipo: 'workshop' },
-    { data: new Date(2023, 5, 30), titulo: 'Festival de Sabores', tipo: 'festival' },
-    { data: new Date(2023, 6, 5), titulo: 'Vinhos Italianos', tipo: 'degustacao' },
-    { data: new Date(2023, 6, 18), titulo: 'Segredos do Molho', tipo: 'workshop' },
-    { data: new Date(2023, 7, 10), titulo: 'Pizza Week', tipo: 'festival' }
-  ];
-  
-  // Adicionar células vazias para os dias antes do primeiro dia do mês
-  for (let i = 0; i < primeiroDiaSemana; i++) {
-    const diaVazio = document.createElement('div');
-    diaVazio.className = 'dia';
-    calendario.appendChild(diaVazio);
-  }
-  
-  // Adicionar células para cada dia do mês
-  for (let dia = 1; dia <= ultimoDia; dia++) {
-    const diaAtual = new Date(ano, mes, dia);
-    const diaEl = document.createElement('div');
-    diaEl.className = 'dia';
-    diaEl.textContent = dia;
-    
-    // Verificar se é o dia atual
-    const hoje = new Date();
-    if (diaAtual.getDate() === hoje.getDate() && 
-        diaAtual.getMonth() === hoje.getMonth() && 
-        diaAtual.getFullYear() === hoje.getFullYear()) {
-      diaEl.classList.add('dia-atual');
-    }
-    
-    // Verificar se há eventos neste dia
-    const eventosNoDia = eventos.filter(evento => 
-      evento.data.getDate() === dia && 
-      evento.data.getMonth() === mes && 
-      evento.data.getFullYear() === ano
-    );
-    
-    if (eventosNoDia.length > 0) {
-      diaEl.classList.add('dia-evento');
-      
-      // Adicionar os eventos do dia
-      eventosNoDia.forEach(evento => {
-        const eventoEl = document.createElement('div');
-        eventoEl.className = `evento-item evento-${evento.tipo}`;
-        eventoEl.textContent = evento.titulo;
-        diaEl.appendChild(eventoEl);
-      });
-    }
-    
-    calendario.appendChild(diaEl);
-  }
-}
 
 
 // Inicializar EmailJS

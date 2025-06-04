@@ -2531,6 +2531,44 @@ margin-left: 200px;
   font-size: 1.3rem;
 }
 
+.mais-eventos {
+  background-color: #666 !important;
+  color: white !important;
+  font-size: 0.7rem !important;
+  font-weight: bold !important;
+  opacity: 0.8;
+}
+
+.dia-evento {
+  position: relative;
+  background-color: #f8f9fa;
+  border: 2px solid #e63946;
+}
+
+.evento-item {
+  font-size: 0.65rem;
+  padding: 1px 3px;
+  margin: 1px 0;
+  border-radius: 2px;
+  color: white;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.evento-workshop {
+  background-color: #28a745;
+}
+
+.evento-degustacao {
+  background-color: #007bff;
+}
+
+.evento-festival {
+  background-color: #e63946;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .google-rating-header {
