@@ -1044,3 +1044,169 @@ function enviarClubeEmail(e) {
       btnSubmit.textContent = 'Participar';
     });
 }
+
+function inicializarContato() {
+  console.log('🔍 DEBUG: Inicializando contato...');
+  
+  const formContato = document.getElementById('contato-form');
+  if (formContato) {
+    formContato.addEventListener('submit', enviarContato);
+    console.log('🔍 DEBUG: Formulário de contato encontrado e configurado');
+  } else {
+    console.log('🔍 DEBUG: Formulário de contato NÃO encontrado');
+  }
+}
+
+function enviarContato(e) {
+  e.preventDefault();
+  console.log('🔍 DEBUG: Função enviarContato iniciada');
+  
+  const nome = document.getElementById('nome').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const mensagem = document.getElementById('mensagem').value.trim();
+  
+  console.log('🔍 DEBUG: Dados capturados:', {nome, email, mensagem});
+  
+  if (!nome || !email || !mensagem) {
+    console.log('🔍 DEBUG: Campos vazios detectados');
+    criarNotificacao('erro', 'Campos obrigatórios', 'Por favor, preencha todos os campos!');
+    return;
+  }
+  
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    console.log('🔍 DEBUG: Email inválido detectado');
+    criarNotificacao('erro', 'Email inválido', 'Por favor, digite um email válido!');
+    return;
+  }
+  
+  console.log('🔍 DEBUG: Validações passaram, tentando enviar email...');
+  
+  const btnSubmit = document.querySelector('.btn');
+  const textoOriginal = btnSubmit.value;
+  btnSubmit.disabled = true;
+  btnSubmit.value = 'Enviando...';
+  
+  // Parâmetros que funcionam com o template template_rt6zdse
+  const parametros = {
+    to_name: `${nome} - Contato`,
+    to_email: email,
+    mensagem_contato: mensagem // Adicionando a mensagem como parâmetro extra
+  };
+  
+  console.log('🔍 DEBUG: Parâmetros preparados:', parametros);
+  console.log('🔍 DEBUG: Service ID: service_0ktygci');
+  console.log('🔍 DEBUG: Template ID: template_rt6zdse');
+  console.log('🔍 DEBUG: Public Key: RLHxfJkHrFDTZDTYB');
+  
+  // Usar os IDs corretos fornecidos
+  emailjs.send('service_0ktygci', 'template_rt6zdse', parametros)
+    .then(function(response) {
+      console.log('✅ Email enviado com sucesso!', response);
+      
+      criarNotificacao('sucesso', 
+        'Mensagem enviada com sucesso! 📧', 
+        'Recebemos sua mensagem e entraremos em contato em breve!'
+      );
+      
+      document.getElementById('contato-form').reset();
+      
+    }).catch(function(error) {
+      console.error('❌ Erro ao enviar email:', error);
+      console.error('🔍 DEBUG: Error details:', {
+        status: error.status,
+        text: error.text,
+        message: error.message
+      });
+      
+      criarNotificacao('erro', 
+        'Erro ao enviar mensagem', 
+        'Tente novamente ou entre em contato por telefone: (16) 3482-2555'
+      );
+      
+    }).finally(function() {
+      console.log('🔍 DEBUG: Finalizando envio...');
+      btnSubmit.disabled = false;
+      btnSubmit.value = textoOriginal;
+    });
+}
+
+
+function criarNotificacao(tipo, titulo, mensagem) {
+  console.log('🔍 DEBUG: Criando notificação:', tipo, titulo, mensagem);
+  
+  // Remover notificações existentes
+  const notificacoesExistentes = document.querySelectorAll('.notificacao-contato');
+  notificacoesExistentes.forEach(n => n.remove());
+  
+  // Criar nova notificação
+  const notificacao = document.createElement('div');
+  notificacao.className = `notificacao-contato ${tipo === 'erro' ? 'notificacao-erro' : ''}`;
+  
+  notificacao.innerHTML = `
+    <div class="notificacao-content">
+      <div class="notificacao-icon">${tipo === 'sucesso' ? '✅' : '❌'}</div>
+      <div class="notificacao-texto">
+        <h3>${titulo}</h3>
+        <p>${mensagem}</p>
+      </div>
+      <button class="notificacao-fechar" onclick="fecharNotificacaoContato(this)">&times;</button>
+    </div>
+  `;
+  
+  document.body.appendChild(notificacao);
+  
+  // Mostrar notificação
+  setTimeout(() => {
+    notificacao.classList.add('mostrar');
+  }, 100);
+  
+  // Auto-fechar após 5 segundos
+  setTimeout(() => {
+    fecharNotificacaoContato(notificacao);
+  }, 5000);
+}
+
+function fecharNotificacaoContato(elemento) {
+  const notificacao = elemento.closest ? elemento.closest('.notificacao-contato') : elemento;
+  
+  if (notificacao) {
+    notificacao.classList.add('saindo');
+    
+    setTimeout(() => {
+      notificacao.remove();
+    }, 400);
+  }
+}
+
+
+
+
+
+// Modificar APENAS a parte do DOMContentLoaded para adicionar o contato
+// Encontre esta parte no seu código e adicione apenas a linha do contato:
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM carregado, página:', getCurrentPage());
+  
+  if (getCurrentPage() === 'home') {
+    setTimeout(() => {
+      animarContadores();
+    }, 1000);
+    initReservas();
+    inicializarClube();
+  }
+  
+  // ADICIONAR APENAS ESTA LINHA:
+  if (getCurrentPage() === 'contato') {
+    inicializarContato();
+  }
+  
+  // ... resto do código existente permanece igual ...
+});
+
+// Inicialização do contato - adicionar no final do arquivo
+setTimeout(function() {
+  if (getCurrentPage() === 'contato') {
+    inicializarContato();
+  }
+}, 1000);
