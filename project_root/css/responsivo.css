@@ -1,17 +1,20 @@
 @media (max-width: 900px) {
   /* TOPO: Navegação e Logo */
   .top-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #112d14;
-    padding: 0 12px;
-    height: 56px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    overflow: hidden;
+  background-color: #112d14;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0;
+  margin: 0;
+  position: fixed; /* ← usar fixed para garantir o encaixe */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
   }
 
   .logo-container {
@@ -67,11 +70,46 @@
     display: none !important;
   }
 
+  .indice-tab {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background-color: #d33;
+    color: #fff;
+    text-align: center;
+    line-height: 1;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .indice-tab:focus,
+  .indice-tab:active {
+    background-color: #b22;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .nav-links a,
+  .nav-links a:focus,
+  .nav-links a:active,
+  .nav-links a:visited,
+  .nav-links a:target,
+  .nav-links a:focus-visible,
+  .nav-links a[aria-current="page"] {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+
+  /* ========== AJUSTES DA PÁGINA UNIDADES ========== */
+
   .container-unidades {
     margin-top: 64px;
   }
 
-  /* ========== AJUSTES DA PÁGINA UNIDADES ========== */
   .unidade-bloco,
   .unidade-bloco.reverse {
     flex-direction: column !important;
@@ -163,6 +201,61 @@
   background-position: center;
   }
 
+   /* ========== AJUSTES DA PÁGINA CARDÁPIO ========== */
+  nav.container-fluid.indice {
+  position: static;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  }
+
+  nav.container-fluid.indice {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 72px; /* isso já é bom, mas o conteúdo ainda está sendo sobreposto */
+  gap: 0.5rem;
+  padding: 0 1rem;
+  }
+
+  nav.container-fluid.indice .indice-tab {
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  clip-path: none; /* já estava certo */
+  border-radius: 20px;
+  text-align: center;
+  }
+
+  main.container {
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  }
+
+  .cardapio-grid {
+  grid-template-columns: 1fr;
+  }
+
+  .cardapio-item {
+  padding: 1rem;
+  font-size: 0.95rem;
+  }
+
+  .cardapio-item h3 {
+  font-size: 1.1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  }
+
+  .cardapio-item h3 .price {
+  font-size: 1rem;
+  } 
+
   /* ========== FOOTER ============ */
 
   .footer {
@@ -213,4 +306,6 @@
   text-align: center;
   padding: 10px 0;
   }
+
+ 
 }
