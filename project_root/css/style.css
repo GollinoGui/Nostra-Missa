@@ -14,11 +14,15 @@
 
 
 body {
-    margin: 0;
+    
+     margin: 0 !important;
+    padding: 0 !important;
+    padding-bottom: 0 !important;
     font-family: 'Poppins', sans-serif;
     background-color: var(--background);
     background-color: #feecd8;  /*no-repeat center center fixed;*/
     transition: background-color 0.5s ease;  
+    
 }
 
 .mode-toggle-button {
@@ -468,6 +472,7 @@ body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body
 html, body {
     overflow-x: hidden !important;
     max-width: 100vw;
+    
   }
   
 
@@ -482,4 +487,18 @@ html, body {
   background-color: transparent !important;
   box-shadow: none !important;
   outline: none !important;
+}
+.footer-bottom {
+   background-color: rgb(202, 50, 50) !important; 
+  text-align: center !important;
+  padding: 5px 0 !important; 
+  margin-top: auto !important; /* MUDAR: de 10px para auto */
+  font-size: 12px !important;
+  color: white !important;
+  width: 100% !important;
+  flex-shrink: 0 !important;
+}
+.footer-bottom p {
+  margin: 0 !important;
+  padding: 0 !important;
 }

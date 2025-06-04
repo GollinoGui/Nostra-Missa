@@ -3,6 +3,7 @@ body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
   color: #333;
+  
 }
 
 /* Estilos gerais para a página inicial */
@@ -957,6 +958,8 @@ margin-left: 200px;
   align-items: center;
   gap: 2rem;
   align-items: center;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .app-mockup {
@@ -2604,4 +2607,17 @@ margin-left: 200px;
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
   }
+}
+.footer-bottom {
+  background-color: rgb(202, 50, 50) !important; 
+  text-align: center !important;
+  padding: 5px 0 !important; 
+  margin: 0 !important;
+  margin-top: auto !important;
+  font-size: 12px !important;
+  color: white !important;
+  width: 100% !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  bottom: 0 !important;
 }
