@@ -249,7 +249,115 @@ form input[type=submit] {
   margin-bottom: 5px;
 }
 
+.footer-bottom {
+  background-color: #410907; 
+  text-align: center;
+  padding: 5px 0; 
+  margin-top: 10px;
+  font-size: 10px; 
+}
 
 
+/* Adicionar no final do arquivo contato.css */
 
+/* Notificações específicas do contato */
+.notificacao-contato {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.4s ease;
+  max-width: 400px;
+}
 
+.notificacao-contato.mostrar {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.notificacao-contato .notificacao-content {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-left: 5px solid #2e7d32;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  position: relative;
+}
+
+.notificacao-contato.notificacao-erro .notificacao-content {
+  border-left-color: #d73427;
+}
+
+.notificacao-contato .notificacao-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.notificacao-contato .notificacao-texto h3 {
+  margin: 0 0 8px 0;
+  color: #2e7d32;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.notificacao-contato.notificacao-erro .notificacao-texto h3 {
+  color: #d73427;
+}
+
+.notificacao-contato .notificacao-texto p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.notificacao-contato .notificacao-fechar {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #aaa;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notificacao-contato .notificacao-fechar:hover {
+  color: #666;
+}
+
+/* Animação de saída */
+.notificacao-contato.saindo {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+/* Responsividade para notificações */
+@media (max-width: 768px) {
+  .notificacao-contato {
+    right: 10px;
+    left: 10px;
+    max-width: none;
+    transform: translateY(-100%);
+  }
+  
+  .notificacao-contato.mostrar {
+    transform: translateY(0);
+  }
+  
+  .notificacao-contato.saindo {
+    transform: translateY(-100%);
+  }
+}
