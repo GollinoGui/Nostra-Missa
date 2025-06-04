@@ -13,7 +13,9 @@
   <link rel="stylesheet" href="project_root/css/contato.css" />
   <link rel="stylesheet" href="project_root/css/responsivo.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- EmailJS APENAS PARA CONTATO -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   
 </head>
 <body>
@@ -33,7 +35,6 @@
   </nav>
 </header>
 
-
   <!-- INFORMAÇÕES VERDE / VERMELHO -->
   <div class="info-dupla">
     <div class="coluna-esquerda">
@@ -49,8 +50,6 @@
         <i class="fas fa-phone-alt"></i>
         <span>LIGUE PARA NÓS</span>
       </div>
-      
-      
     </div>
 
     <div class="coluna-direita">
@@ -69,7 +68,7 @@
   <!-- FORMULÁRIO FIXO -->
 <section class="form-container">
   <div class="contact-box-fixed">
-    <form action="http://localhost:5000/enviar" method="POST">
+    <form id="contato-form">
       <h1>CONTATE-NOS</h1>
       <p>Preencha as informações abaixo e entraremos em contato com você!</p>
 
@@ -96,6 +95,39 @@
   <!-- Scripts -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="project_root/js/script.js"></script>
+  
+  <!-- Inicialização do EmailJS APENAS PARA CONTATO -->
+<script>
+console.log('🔍 DEBUG: Inicializando EmailJS para contato...');
+
+(function(){
+  try {
+    // Usar a Public Key correta do contato
+    emailjs.init("RLHxfJkHrFDTZDTYB");
+    console.log('✅ EmailJS inicializado com Public Key: RLHxfJkHrFDTZDTYB');
+    console.log('✅ Service ID configurado: service_0ktygci');
+    console.log('✅ Template ID configurado: template_rt6zdse');
+  } catch(error) {
+    console.error('❌ Erro ao inicializar EmailJS:', error);
+  }
+})();
+
+// Inicializar o contato
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🔍 DEBUG: DOM carregado na página de contato');
+  console.log('🔍 DEBUG: EmailJS disponível?', typeof emailjs !== 'undefined');
+  
+  setTimeout(() => {
+    if (typeof inicializarContato === 'function') {
+      inicializarContato();
+      console.log('✅ Contato inicializado!');
+    } else {
+      console.error('❌ Função inicializarContato não encontrada!');
+    }
+  }, 1000);
+});
+</script>
+
 </body>
 </html>
 
